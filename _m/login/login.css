@@ -1,0 +1,337 @@
+/*
+html { 
+background: url(/img/cover1.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/hiking-12-apostles_gor_r_1374396_1150x863.jpg', sizingMethod='scale');
+-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/hiking-12-apostles_gor_r_1374396_1150x863.jpg', sizingMethod='scale')";
+height:100%;
+}
+*/
+
+html { 
+background: url(/img/scene/girljump_1150x863.jpg?a) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/scene/girljump_1150x863.jpg?a', sizingMethod='scale');
+-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/scene/girljump_1150x863.jpg?a', sizingMethod='scale')";
+height:100%;
+}
+
+
+body {
+	background:none;
+}
+
+#core {
+    margin: 84px auto 0;background:none;
+}
+#menuFixed {
+    margin: 24px 0 0;
+	min-width: auto!important;
+}
+#logologin {
+	left: 10px;
+	position: absolute;
+	top: 0;
+	display: none;
+}
+
+
+.logoClaim {
+    color: #ffffff;
+    font-size: 11px;
+    left: 51px;
+    position: absolute;
+    top: 41px;
+}
+
+
+
+
+#form_login {
+    float: left;
+    margin: 12px 0 0;
+    padding: 0 0 0 13px;
+    position: relative;
+    width: 94%;
+}
+.inputCont {
+    float: left;
+    height: 30px;
+    margin: 10px 0 0 15px;
+    position: relative;
+
+}
+#form_login_user, #form_login_password {
+    border: 1px solid #386916;
+    border-radius: 5px;
+    color: #386916;
+    font-size: 17px;
+    height: 30px;
+    left: 0;
+    padding: 0 1px 0 5px;
+    position: absolute;
+    top: 0;
+}
+
+.inputCont, #form_login_user, #form_login_password{
+width: 147px;
+}
+
+#form_login_user_textover, #form_login_password_textover  {
+    color: #999999;
+    font-size: 17px;
+    left: 5px;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+	}
+
+.button_action_blue {
+    background-color: #386916;
+    border: 1px outset #444444;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    height: 18px;
+    margin: 10px 0 0 15px;
+    padding: 5px 15px 7px 15px;
+    text-align: center;
+}
+.button_action_blue:hover{
+	border: 1px outset #999;
+}
+.button_action_blue:active{
+	border: 1px inset #444444;
+	padding: 4px 16px 8px 14px
+}
+
+
+
+/*#form_login_submit:active{top: 16px;}*/
+#form_login_submit div {
+    font-size: 16px;
+    left: 19px;
+    position: absolute;
+    top: 7px;
+}
+#langsCont {
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+    top: -22px;
+    width: 160px;
+}
+#langsCont a {
+    color: #ffffff;
+    margin: 0 14px 0 0;
+}
+.arLink {
+    
+    font-size: 15px;
+/*    margin-top: -2px !important;float: right;*/
+}
+.ERROR_MSG{
+    background-color: #ffff99;
+    border: 1px solid #aaa;
+    box-shadow: 2px 1px 4px #666;
+    color: #444;
+    font-size: 12px;
+    left: 40px;
+    padding: 2px 10px;
+    position: absolute;
+/*    bottom: -16px;*/
+	bottom: -93px;
+    width: -moz-max-content;
+    z-index: 1;
+}
+.ERROR_MSG2{
+    background-color: #ffff99;
+    border: 1px solid #aaa;
+    box-shadow: 2px 1px 4px #666;
+    color: #444;
+    font-size: 12px;
+    left: 40px;
+    padding: 2px 10px;
+    position: absolute;
+/*    bottom: -16px;*/
+	bottom: -132px;
+    width: -moz-max-content;
+    z-index: 1;
+}
+
+/*******SIGN UP *************/
+
+.menuFixedMini {
+    background-color: #386916;
+    border-radius: 0 0 5px 5px;
+    height: 30px!important;
+    margin: 0!important;
+}
+.menuFixedMini #logologin
+, .menuFixedMini .logoClaim{
+display:none;
+}
+#logologin_mini {
+    float: left;
+    margin: 4px 0 0 8px;
+	display:none
+}
+
+.menuFixedMini #logologin_mini {
+display:block
+}
+
+
+.menuFixedMini #langsCont {
+    float: right;
+    margin: 2px 0 0;
+    position: relative;
+    top: auto;
+}
+
+
+.signupbox {
+    background: rgba(0, 0, 0, 0) url("/img/blackout60.png") repeat scroll 0 0;
+    border-radius: 5px;
+    float: left;
+    margin: 23px 0 126px 15px;
+    max-width: 395px;
+    padding: 17px 0 26px 21px;
+    position: relative;
+    width: 85%;
+}
+.signupbox .button_action_blue {
+    background-color: #008000;
+    margin: 8px 0 0;
+    max-width: 312px;
+    width: 84%;
+}
+
+.signupbox .title, .signupbox .pretitle {
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 0 0 9px;
+    text-shadow: 1px 2px 2px #000000;
+}
+.signupbox .pretitle {
+    color: #ffffff;
+    font-size: 12px;
+    margin: 2px 0 3px 1px;
+	margin: 0 0 4px;
+}
+.inputf {
+    border: 1px solid #555555;
+    border-radius: 5px;
+color: #3b3b3b;
+    font-size: 17px;
+    height: 30px;
+    left: 0;
+    padding: 0 1px 0 5px;
+    position: absolute;
+    top: 0;
+    width: 160px;
+}
+.inputf_fake  {
+    color: #999999;
+    font-size: 17px;
+    left: 5px;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+	}
+.inputContSi {
+    float: left;
+    height: 30px;
+    margin: 10px 16px 0 0;
+    position: relative;
+    width: 160px;
+}
+
+.inputContSi {
+    float: left;
+    height: 30px;
+    margin: 10px 16px 0 0;
+    position: relative;
+    width: 160px;
+}
+.inputlong, .inputlong .inputf {
+    max-width: 346px;
+    width: 97%;
+}
+.legal_signup {
+    color: #c6c6c6;
+    float: left;
+    font-size: 12px;
+    padding: 12px 0 1px;
+    width: 93%;
+}
+.legal_signup a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.redBorder{border:1px solid red}
+
+
+#si_error {
+    background: #ff0000 none repeat scroll 0 0;
+    border-radius: 5px;
+    color: #ffffff;
+    float: left;
+    font-size: 12px;
+    margin: 11px 0 -3px;
+    padding: 6px 0 6px 15px;
+    width: 83%;
+	display:none
+}
+
+#inputSiemail .spin16 {
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 8px;
+	display:none;
+}
+#loadingBar {
+float: left;
+width: 60%;
+padding: 0 0 0 40%;
+display: none;
+margin: 5px 0 0 0;
+}
+
+.content {
+    color: #555555;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/***************/
+.emailgobox {
+    background: #ffffff none repeat scroll 0 0;
+    border-radius: 5px;
+    float: left;
+    margin: 23px 0 -17px 15px;
+    max-width: 380px;
+    padding: 17px 20px 26px 21px;
+    position: relative;
+    width: 81%;
+}
+.emailgobox .title {
+    color: #555555;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 0 0 15px;
+}
+
+

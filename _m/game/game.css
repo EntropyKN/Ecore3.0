@@ -1,0 +1,153 @@
+#core {
+    margin: 52px auto 0;}
+
+
+#coreIn {
+	padding: 0px 20px 15px 20px;
+}
+.creditsGroup {
+    margin: -5px 0 10px 10px;
+    font-size: 13px;
+    color: #999;
+}
+.titleG {
+	color: #666;
+	font-weight: bold;
+	font-size: 24px;
+	/* font-variant: small-caps; */
+	padding: 5px 7px;
+}
+.titleG span {
+	background-color: yellow;
+	padding: 0px 5px;
+	border-radius: 9px;
+}
+
+.mindescr {
+	padding: 5px 9px;
+	color: #666;
+}
+.mindescr span {
+	font-weight:bold
+}
+/*
+.cover {
+	max-width: 1024px;
+	width: 100%;
+}
+*/
+.cov {
+   /* border: 1px solid #e1e1e1;*/
+   /* border-radius: 10px 10px 0 0;*/
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.cov .tosize {
+    float: left;
+    margin: 0 0 0 0px;
+    width: 100%;
+}
+.cov .back {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.cov .cover {
+    float: left;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: -38%;
+    width: 100%;
+}
+#timg {
+	bottom: 0;
+	color: #ffffff;
+	display: unset !important;
+	float: left;
+	font-size: 30px;
+	font-variant: small-caps;
+	left: 0;
+	line-height: 20px;
+	margin: 0 0 0 8px;
+	padding: 6px 0 5px;
+	position: absolute;
+	width: 97%;
+	z-index: 2;
+}
+.descr {
+	font-size: 19px;
+	padding: 10px;
+	line-height: 25px;
+	text-align: justify;
+}
+
+.Hline {
+	padding: 0 15px;
+}
+.Hline span{color:#666}
+
+
+
+
+.con {
+	font-size: 14px;
+	padding: 3px 10px 12px 16px;
+	/* float: left; */
+	width: 90%;
+}
+.option.play {
+	border: 1px solid #ccc;
+	font-size: 13px;
+	padding: 5px 10px 4px 30px;
+	margin: 0px 0 0 9px;
+	float: left;
+	font-weight: bold;
+	color: #666;
+	text-align: left;
+	width: 47px;
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	background: #fff url("/img/ico/blu_r16.png") no-repeat scroll 5px 5px;
+}
+.option.copy {
+	border: 1px solid #ccc;
+	font-size: 13px;
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	padding: 5px 10px 4px 26px;
+	margin: 4px 0 0 0px;
+	float: left;
+	font-weight: bold;
+	color: #666;
+	text-align: left;
+	width: 195px;
+	background: #fff url("/img/ico/option.png") no-repeat scroll 5px 5px;
+}
+
+.option.edit {
+	border: 1px solid #ccc;
+	font-size: 13px;
+	padding: 5px 23px 4px 23px;
+	margin: 0px 0 0 9px;
+	float: left;
+	font-weight: bold;
+	color: #666;
+	text-align: left;
+	width: 47px;
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	background: #fff url("/img/ico/comment_on.png") no-repeat scroll 5px 5px;
+}
+
+#createcopyDONE{
+color:#386916!important
+}
+select {
+    padding: 3px 25px 3px 5px;
+    background: #fff url(/img/ico/blu_d16.png) no-repeat scroll 105px 5px;
+    width: 133px;
+    height: 26px;
+}
+	

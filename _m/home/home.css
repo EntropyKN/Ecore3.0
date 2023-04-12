@@ -1,0 +1,257 @@
+.creditsGroup {
+    margin: 0 0 0 8px;
+    font-size: 12px;
+    color: #999;
+}
+.creditsTitle {
+    float: left;
+    margin: 0 4px 0 0;
+}
+.creditsName{float: left}
+
+.rightOptions.excel a:hover {
+	text-decoration: underline;
+}
+
+.boxresp {
+float:left;width:100%
+}
+
+.box {
+    border-bottom: 1px solid #cccccc;
+   /* border-radius: 15px 15px 0 0;*/
+    margin: 0px 10px 15px;
+
+    overflow: hidden;
+    padding: 0 10px 30px;position: relative;
+}
+.content {
+    padding: 40px 0 0;
+}
+.box .title {
+    color: #9e9e9e;
+    font-size: 76px;
+    font-weight: bold;
+    opacity: 0.54;
+    position: absolute;
+    right: 16px;
+    text-align: right;
+    text-shadow: 2px 0 1px #000000;
+    top: -8px;
+    z-index: 1;
+}
+.box a:hover{color: #386916; text-decoration:underline}
+.box li a {
+    font-size: 16px;
+}
+.box li {
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 2px 1px 5px #787878;
+    float: left;
+    list-style: outside none none;
+    margin: 10px 1%;
+    width: 47%;
+}
+.box li span {
+    display: block;
+}
+
+
+.rightLink {
+    background-color: #386916;
+    border-radius: 3px;
+    color: #ffffff;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 5px 10px;
+}
+.rightLink:hover{color:#fff!important; margin-top:9px;text-decoration:none!important;background-color:#386916}
+.rightLink:active{color:#fff!important; margin-top:11px;text-decoration:none!important}
+.rightLink.rightLinkalone {
+    margin: 43px 1.7% -12px 0 !important;
+}
+.pagemark .rightLink {
+    margin: 0 3px;
+}
+.boxadvice {
+    float: left;
+    width: 100%;
+}
+
+
+.boxadviceIn {
+    background-color: #ffffcc;
+    border: 1px solid #dfdfdf;
+    font-size: 13px;
+    margin: 0 10px;
+    padding: 10px 100px 10px 10px;
+	position:relative;
+}
+.boxadviceIn .dismiss{
+	position:absolute;
+	top:0;
+	right:0;
+}
+.boxadviceIn > span {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+}
+.boxadviceIn .dismiss {
+    background-color: #386916;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 5px 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.boxadviceIn .dismiss:hover{top:9px}
+.boxadviceIn .dismiss:active{top:11px}
+
+
+
+.more {
+    color: #7eb7f6;
+    float: right;
+    font-size: 13px !important;
+}
+.operations {
+    display: none;
+    float: right;
+    margin: 1px 0 0;
+}
+.operations  a {
+    font-size: 13px !important;
+}
+/***************/
+.cov {
+   /* border: 1px solid #e1e1e1;*/
+    border-radius: 10px 10px 0 0;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.cov .tosize {
+    float: left;
+    margin: 0 0 0 0px;
+    width: 100%;
+}
+.cov .back {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.cov .cover {
+    float: left;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.cov:hover .cover {
+    left: -4%;
+    top: -1%;
+    width: 106%;
+}
+
+.timg {
+    bottom: 0;
+    color: #ffffff;
+    display: unset !important;
+    float: left;
+    font-size: 16px;
+    font-variant: small-caps;
+    left: 0;
+    line-height: 14px;
+    margin: 0 0 0 8px;
+    padding: 6px 0 5px;
+    position: absolute;
+    width: 97%;
+    z-index: 2;
+}
+.tdescr {
+    color: #444444;
+    font-size: 15px !important;
+    line-height: 17px;
+    margin: 5px 8px 8px;
+}
+.tline strong {
+    color: #666666;
+}
+
+.tline.moremt {
+    color: #33a0fd;
+    float: left;
+    font-size: 12px;
+    min-height: 17px;
+    width: 100%;
+}
+
+.tline.morem, .tline.morem a {
+    font-size: 12px!important;
+} .tline.morem{
+    color: #666;}
+.tline.min {
+    color: #999999;
+    font-size: 12px;
+    margin: 0 0 3px;
+}
+.tline a {
+    font-size: 15px !important;
+}
+.moreon {
+    color: #444444 !important;
+    font-size: 14px !important;
+    margin: 0 0 4px;
+}
+
+.playlink {
+    margin-top: 1px;
+}
+.rightLink.nexpage {
+    margin: 0;
+}
+.moremgroup {
+    display: none;
+}
+
+.toptions {
+    display: inline-block !important;
+    width: 98%;
+}
+.toptions a {
+    float: right;
+    font-size: 12px !important;
+    margin: 0 3px;
+}
+
+.pagemark {
+    float: left;
+    height: 22px;
+    margin: 10px 0 0;
+    position: relative;
+    width: 97.5%;
+}
+
+.pagemark .spin16 {
+    position: absolute;
+    right: 10px;
+    top: 6px;display:none;
+}
+.nores {
+    color: #888888;
+    float: left;
+    font-size: 19px;
+    line-height: 20px;
+    margin: 7px 0 -9px;
+}

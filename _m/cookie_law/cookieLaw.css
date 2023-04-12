@@ -1,0 +1,49 @@
+
+#cookeLawCont {
+    background-color: #000;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000000;
+    padding: 6px 0;
+	text-align: center;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80
+}
+#cookeLawMsg {
+    bottom: 0;
+    color: #fff;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    left: 0;
+    padding: 6px 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 1000001;
+} #cookeLawMsg a{ color: #FFF; text-decoration:underline}
+#cookeLawMsg .c1 {
+    font-size: 15px;
+    font-weight: bold;
+    margin:0 20px;
+}
+#cookeLawMsg .c2 {
+
+}
+
+#cookeLawMsgClose {
+    background-color: #ddd;
+    color: #000 !important;
+    display: inline-block;
+    margin: 7px 0 0;
+    padding: 1px 20px;
+    text-decoration: none !important;
+} #cookeLawMsgClose:hover{
+	background-color: #fff;
+
+}
+

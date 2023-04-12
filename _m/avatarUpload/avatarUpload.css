@@ -1,0 +1,286 @@
+body{
+color: #666;
+}
+#coreIn {
+    min-height: 100px;
+}
+.marginBottom{
+margin-bottom: 15px
+}
+.marginBottom2{
+margin-bottom: 30px
+}
+
+.title1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #666;
+    padding-bottom: 5px;
+}
+.title2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+}
+.title2 img {
+    float: left;
+    width: 21px;
+    height: auto;
+    margin: -2px 5px 0 0;
+}
+.content1 {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 10px;
+}
+
+.iFrameLike {
+    height: 170px;
+    background: black;
+    width: 630px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    background-image: url("/_m/avatarUpload/squaresBackground.svg");
+    background-size: 65% 100%;
+    margin-left: 10px;
+}
+.iFrameLike img {
+    height: 155px;
+    width: auto;
+}
+a.linkD {
+    color: #386916;
+    text-decoration: none;
+    font-weight: bold;
+}
+a.linkD:hover{text-decoration: underline}
+
+#load1, #load2 {
+    float: left;
+    margin: -6px 88px 10px 7px;
+    width: 337px;
+    /* display: none; */
+}
+
+.buttonS {
+    background-color: #386916;
+    border-radius: 6px;
+    color: #ffffff;
+    float: left;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 4px 10px 10px 4px;
+    padding: 8px 10px;
+    cursor: pointer;
+    text-align: center;
+    width: 340px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+.buttonS:hover {background-color: #2d5412;}
+.buttonS:active {background-color: #2d5412;
+  border-top: 1px solid #333333;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #333333;
+  padding: 7px 10px 9px 10px;
+
+}
+.buttonS .bsTitle {
+    font-weight: normal;
+    font-size: 14px;
+    /* margin: 9px 0 0 0; */
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+#attachmentCont{
+position: relative;
+height: 5px;
+width: 5px;
+overflow: hidden
+
+}
+.attachmentInputC {
+    position: absolute;
+    top: 0;
+    left: -202px;
+}
+
+.content_advice {
+    background-color: #FFFF99;
+    border: 1px solid #F7C500;
+    font-size: 15px;
+    margin-bottom: 15px;
+    padding: 10px 17px;
+    min-width: 337px;
+    margin-left: 7px;
+    float: left;
+    color: #444;
+    border-radius: 5px;
+}
+.content_advice button {
+    display: table;
+    margin: 15px 0 0 0;
+    width: 56px;
+    height: 26px;
+}
+#issue{display: none}
+#issueC {
+    width: 100%;
+    float: left;
+}
+/*****************************/
+
+
+@keyframes play_wait_M{
+	100% { background-position: -3200px; } 
+}
+.wait_M {
+    width: 160px;
+    height: 383.36px;
+    animation: play_wait_M 7.0s steps(20) infinite;
+    position: absolute;
+    background-size: 3200px 383.36px;
+border: 2px dashed #555;
+    left: 70px;
+    top: 5px;
+}
+/********************/
+
+.fakePlayer {
+    width: 300px;
+    height: 397px;
+    background: black;
+    position: relative;
+
+    background-image: url(/_m/avatarUpload/squaresBackground.svg);
+    background-size: 1920px 1080px;
+    margin: 0px 10px 25px 10px;
+    background-position: -60px -41px;
+    border: 1px solid #ccc;
+}
+
+.fakePlayer .balloon {
+    width: auto;
+    height: auto;
+    background-color: #fff;
+    position: absolute;
+    top: 50px;
+    z-index: 1;
+    left: 225px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px 15px 10px 15px;
+    /* box-shadow: 0px 2px 6px #b4b4b4; */
+    font-size: 13px;
+    /* cursor: move; */
+    border: 1px solid #222;
+max-width: 300px;
+    min-height: 32px;
+    min-width: 180px;
+    color: #222;
+    word-break: break-all;
+
+
+opacity: 0.90;
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+filter: alpha(opacity=90);
+-moz-opacity: 0.90;
+-khtml-opacity: 0.90;	
+	
+}
+
+.leftArrow {
+	position: absolute;
+	top: 10px;
+	right: -17px;display:none
+}
+.rightArrow {
+	position: absolute;
+	top: 10px;
+	left: -17px;display:inline;
+}
+
+
+#done1, #done2, #doneFinal{display: none}
+
+input[type="text"] {
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    padding: 5px 8px;
+    width: 340px;
+    color: #333;
+    margin: -4px 0 13px 8px;
+    float: left;
+}
+
+/***radio ***********/
+.options1 {
+    width: 100%;
+    float: left;
+    padding: 0 0 0 15px;
+}
+.container {
+  display: block;
+  position: relative;
+    padding-left: 25px;
+    margin: 0px 12px 12px 0;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  float: left
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+
+.container input:checked ~ .checkmark {
+  background-color: #386916;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+
+.container .checkmark:after {
+top: 6px;
+    left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+#b19{display: none}

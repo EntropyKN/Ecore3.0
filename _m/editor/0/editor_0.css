@@ -1,0 +1,295 @@
+/*#scenario_link {
+    float: left;
+    height: 480px !important;
+}
+*/
+
+#balloon_container {
+    width: 500px;
+    height: 163px;
+    margin: 0 0 0 61px;
+    position: relative;
+}
+
+#balloon {
+    z-index: 3;
+    width: auto;
+    height: auto;
+    background-color: #fff;
+    position: absolute;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #222;
+    padding: 16px 30px 20px 30px;
+    font-size: 21px;
+    top: 28px;
+    left: 103px;
+    max-width: 600px;
+    min-height: 64px;
+    /*min-width: 120px;    */
+    min-width: 230px;
+    color: #222;
+}
+#leftArrow {
+    position: absolute;
+    top: 20px;
+    right: -34px;
+    display: none;
+    z-index: 3;
+}
+#rightArrow {
+    position: absolute;    
+    right: -34px;
+    z-index: 3;
+    left: -17px;
+    top: 22px;
+    display: inline;
+}
+
+.selectFollowUp {
+    float: left;
+    height: 45px;
+    width: 256px;
+    margin: 7px 0 0 172px;
+}
+img.cover {
+    width: 454px;
+    margin: 0 0 0 168px;
+}
+#L_usr_description,#L_usr_goal1{
+	display:none;
+}
+
+#saving {
+	position: absolute;
+	border: 1px solid #8c8c00;
+	padding: 1px 10px;
+	right: 104px;
+	top: 42px;
+	font-size: 12px;
+	background: #ffffcc;
+	border-radius: 7px;
+	display:none;
+}
+canvas {
+left: 170px!important;top:40px!important
+}
+.line {
+    display: inline-block;
+    margin: 0 0 4px;
+    position: relative;
+    width: 700px;
+}
+#L_usr_female_avatar_id{
+    height: 271px;
+	position:relative;
+}
+#L_usr_male_avatar_id {
+    height: 10px;
+	position:relative;
+}
+#L_usr_male_avatar_id .field {
+	position: absolute;
+	top: -243px;
+}
+#usr_male_avatar_id {
+	position: absolute;
+	top: -245px;
+	left: 170px;
+}
+
+#covercanvas {
+	width: 449px;
+	margin: 7px 0 23px 171px;
+}
+
+#L_cover_id{
+position:relative
+}
+#coverPlus {
+	top: 54px;
+	left: 134px;
+}
+#coverMinus {
+	top: 54px;
+	right: 49px;
+}
+#coverMinus, #coverPlus {
+	width: 28px;
+	position: absolute;
+	height: 46px;cursor:pointer;
+}
+.field {
+    float: left;
+    font-size: 14px;
+    margin: 5px 10px 0;
+    text-align: right;
+    width: 150px;
+}
+input[type="text"], textarea{
+    border: 1px solid #cccccc;
+    font-size: 13px;
+    padding: 5px 8px;
+    width: 430px;
+	color:#333
+	
+}
+textarea {
+    height: 50px;
+}
+#L_Goal_2,#L_Goal_3,#L_Goal_4,#L_Goal_5,
+#L_usr_goal2,#L_usr_goal3,
+#L_bot_goal2,#L_bot_goal3
+{display:none}
+
+
+.addGymGoal, .addUsrGoal, .addBotGoal {
+    display: inherit;
+    font-size: 11px;
+    margin: 2px 0 0;
+    text-align: right;
+    width: 614px;
+}
+
+.coverSpecification {
+    display: inherit;
+    font-size: 11px;
+    margin: 2px 0 15px 170px;
+    text-align: left;
+    width: 446px;
+    color: #777;
+    /* background: #ccc; */
+}
+
+#valid_forever {
+	display: inherit;
+	font-size: 11px;
+	/* margin: 2px 0 0; */
+	/* text-align: right; */
+	/* width: 614px; */
+	position: absolute;
+	right: 90px;
+	top: 8px;display:none
+}
+
+#scenario_prev {
+    float: right;
+    height: 253px;
+    margin: 8px 81px 0 0;
+    width: 450px;
+}
+
+#avatarcanvasM, #avatarcanvasF {
+	/* background: #ffffff none repeat scroll 0 0; */
+	height: 275px;
+	width: 112px;
+	top: -5px;
+	right: 132px;
+}
+#avatarcanvasM {
+	top: -277px;
+	right: 5px;
+}
+
+
+.line .spin64{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#errorList {
+    background-color: #ffffcc;
+    border: 1px solid #bfbfbf;
+    color: #555555;
+    float: left;
+    font-size: 13px;
+    margin: 10px 0 0 165px;
+    padding: 10px;
+    width: 260px;
+	display:none
+}
+
+#errorList div {
+    font-weight: bold;
+    margin: 0;
+}
+#errorList > span {
+    float: left;
+    margin: 7px 0 0 8px;
+}
+#errorList li {
+ list-style-type: circle;
+ list-style-position:inside;
+ list-style-image: none;
+	font-size: 13px;
+}
+
+
+#cover{
+	padding:0;
+	float:right; width:42px !important;
+	display:none
+	}
+.cover_msg {
+    float: left;
+    margin: 5px 0 0 0;
+    color: #bbb;
+}
+#covermsg_selected{display:none}
+
+#coverlist {
+    float: right;
+    width: 530px;
+    margin: 7px 0 0 0;
+}
+#coverlist > a {
+    position: relative;
+    display: inline-block;
+}
+#coverlist a img {
+    margin: 0 0 5px;
+    width: 100%;
+}
+
+.editButt {
+    margin: 10px 0px 10px 45px;
+}
+#coverSelector {
+    background: rgba(0, 0, 0, 0) url("/img/selected60x60.png?S") no-repeat scroll center center;
+    height: 60px;
+    right: 3px;
+    position: absolute;
+    top: 3px;
+    width: 60px;
+    z-index: 1;
+}
+.optionsGroup,.hidden{
+display:none}
+#optionsGroupShow {
+	float: left;
+	display: inline-block;
+	width: 600px;
+	margin: 0 0 0 167px;
+}
+
+
+#L_forkFrom div, #L_forkFrom select{
+		display:none;
+}
+#structureImg_fork {
+	position: absolute;
+	top: 0;
+	right: 78px;
+
+}
+#structureImg_linear {
+	position: absolute;
+	top: 17px;
+	right: 78px;
+
+}
+
+#L_structureBefore{
+	display:none;
+}

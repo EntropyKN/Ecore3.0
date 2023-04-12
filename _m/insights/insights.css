@@ -1,0 +1,209 @@
+#coreIn {
+    padding: 15px 26px 15px 26px;
+}
+.offline {
+	color: #808080;
+}
+
+.chart {
+	float: left;
+	height: 250px;
+	width: 100%;
+	max-width: 840px;
+	display: none;
+	/* border: 1px solid #000; */
+	margin: 10px 18px 0 18px;
+}
+.chartSub {
+	text-align: right;
+	width: 100%;
+	max-width: 855px;
+	font-size: 10px;
+	color: #8B8B8B;
+	/* margin: 0px 0 0 45px; */
+}
+
+.excel {
+	background: #fff url("/img/ico/excel28.png") no-repeat scroll 3px 0 / 21px 21px;
+	/* height: 72px; */
+	padding: 0px 0 0 30px;
+	float: right;
+	font-size: 17px;
+	margin: 5px 0 0 0;
+}
+#ids_group,#ids_user,#ids_gym{
+	display:none;
+}
+#dateShow {
+	float: left;
+	margin: 4px 0 0 14px;
+	font-weight: bold;
+	color: #666;
+}
+#custom {
+	margin: 8px 0 0 0;
+}
+
+#custom input[type="text"] {
+	border: 1px solid #ccc;
+	color: #333333;
+	font-size: 13px;
+	padding: 4px 12px;
+	width: 154px;
+	margin: 0 6px;
+}
+
+
+#gug {
+	margin: 22px 0 0 0;
+}
+
+#groupss, #userss, #gymss {
+	width: 246px;
+	float: left;
+	margin: 10px 20px 0 0;
+	border: 1px solid #ccc;border-radius: 5px;
+
+}
+.latChoice {
+	font-weight: normal;
+	float: right;
+	margin: 1px 12px 0 0;
+	font-size: 12px;
+	display:none;
+}
+#nogroups{display:block}
+.cont {
+	overflow-x: hidden;
+	overflow-Y: auto;
+	width: 245px;
+	float: left;
+	margin: 0 0 0 0;
+	height: 200px;
+	padding: 0;
+}
+.stit {
+	font-weight: bold;
+	color: #666;
+	padding: 8px 0 8px 7px;
+	border-bottom: 1px solid #ccc;
+}
+.r {
+	border-bottom: 1px solid #E8E8E8;
+	padding: 7px 40px  7px 10px;
+	max-height: 34px;
+	overflow: hidden;
+	position: relative;
+}
+.r:hover {
+	background-color: #386916;
+	color: #fff;
+}
+.on {
+	background-color: #E8E8E8;
+	background-image: url("/img/ico/ok16.png");
+	background-position: 201px 8px;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #FFF;
+	
+}
+
+/*
+#groupss {
+    background: red;
+}
+#userss {
+    background: green;
+}
+#gymss {
+    background: yellow;
+}
+*/
+
+.button_action_blue {
+	background-color: #386916;
+	border: 1px outset #0036b7;
+	border-radius: 4px;
+	color: #ffffff;
+	cursor: pointer;
+	float: left;
+	font-size: 16px;
+	height: 18px;
+	margin: 15px 0 0 15px;
+	padding: 5px 15px 7px;
+	text-align: center;
+	float: left;
+}
+.button_action_blue:active {
+    border: 1px inset #386916;
+    padding: 4px 16px 8px 14px;
+    background-color: #386916;
+}
+.button_action_blue:hover {
+    background-color: #2784F1;
+}
+
+#suggest {
+	float: left;
+	margin: 19px 0 10px 14px;
+	font-size: 21px;
+}
+
+#result {
+	padding: 10px 10px 10px 20px;
+}
+#result .title {
+	font-size: 21px;
+	margin: 0 0 12px 0;
+	max-width: 860px;
+}
+.insightBoxStright {
+	/* font-weight: bold; */
+	color: #555;
+	font-size: 18px;
+	margin-bottom: 13px;
+}
+.insightBox {
+	border: 1px solid #000;
+	float: left;
+	margin: 0 14px 10px 0;
+	padding: 5px 0px 5px 10px;
+	border-radius: 4px 4px 0 0;
+	width: 418px;
+}
+.insightBoxT {
+	font-weight: bold;
+	color: #555;
+}
+.insightBoxC table{
+font-size:13px;
+}
+.insightBoxC table .H td {
+	font-size: 10px;
+	border: none;
+	line-height: 11px;
+	font-weight: bold;
+}
+.insightBoxC table tr {
+font-size:12px;
+border-bottom: 1px solid;
+}
+
+.insightBoxC table  td{
+text-align:center
+}
+.insightBoxC table .n {
+	text-align: left;
+	width: 120px;
+	overflow: hidden;
+	/* max-height: 7px; */
+	padding: 2px 0 5px 0;
+	/* background: red; */
+}
+.insightBoxC {
+	height: 174px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin-top: 5px;
+}
+

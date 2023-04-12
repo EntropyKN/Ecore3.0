@@ -1,0 +1,48 @@
+#form_login_user_textover, #form_login_password_textover {
+	left:auto!important;
+    right: 5px!important;
+}
+#form_login_user, #form_login_password{
+   padding: 0 5px!important;
+    text-align: right!important;
+}
+
+.ERROR_MSG {
+    text-align: right !important;
+}
+/*dashboard*/
+.box, .box .title {
+text-align: right !important;
+font-size: 17px!important;
+}
+
+.tooltip,.error {
+    padding: 2px 10px;
+	text-align: right!important;
+}
+/*player*/
+#explainH a{
+font-size:16px!important
+}
+.box,.infoImage > span,
+#contentH .title,
+#infoCharsC, #contentH,#say, .sayOpt
+{
+    text-align: right!important;
+
+}
+#contentH .title{font-size:16px!important}
+.blueButt {
+    font-size: 20px!important;}
+	
+	
+
+.infoImage > span {
+	left:auto!important;
+    right: 10px!important;
+}
+
+
+
+
+

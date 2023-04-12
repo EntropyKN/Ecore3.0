@@ -1,0 +1,98 @@
+
+#nowEditing {
+	/* border-left: 1px solid #cccccc; */
+	color: #ffffff;
+	font-size: 15px;
+	font-variant: small-caps;
+	height: 38px;
+	overflow: hidden;
+	position: absolute;
+	right: 103px;
+	text-align: right;
+	top: 10px;
+	width: 431px;
+}
+
+.gymSep {
+    border-bottom: 1px dashed #dedede;
+    color: #aaaaaa;
+    float: left;
+    font-variant: small-caps;
+    margin: 10px 0 15px;
+    padding: 0 10px 4px 0;
+    text-align: right;
+    width: 700px;
+}
+
+
+.editButt {
+    background-color: #386916;
+    color: #ffffff;
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    height: 41px;
+    margin: 10px 77px 10px 10px;
+    padding: 10px 20px;
+    position: relative;
+    text-align: center;
+}
+.editButt:hover {
+	margin-top: 9px;
+	color: #fff;
+	margin-bottom: 11px;
+}
+.editButt:active{margin-top:11px;margin-bottom: 9px;}
+.editButt .l1 {
+    display: inherit;
+    font-size: 21px;
+}
+.editButt .l2 {
+    display: inherit;
+    font-size: 12px;
+}
+
+
+.editButtArrow {
+    height: 100%;
+    position: absolute;
+    right: -30px;
+    top: 0;
+}
+.notCorrect {
+    border: 1px solid #da7575 !important;
+}
+.cancelled{text-decoration:line-through}
+
+
+.backbtn {
+    float: left;
+    margin: 10px 10px 10px 37px;
+	background-color:#999
+}
+.rightbtn {
+    background-color: #999999;
+    float: left;
+    margin: 10px 0 10px 6px;
+    max-width: 87px;
+}
+.rightbtn .editButtArrow{
+    height: 100%;
+    right: -30px;
+    position: absolute;
+    top: 0; 
+}
+.rightbtn .l3 {
+    font-size: 16px;
+}
+/*
+.backbtn:hover{margin-top:9px}
+.backbtn:active{margin-top:11px}
+*/
+.editButtArrowR {
+    height: 100%;
+    left: -30px;
+    position: absolute;
+    top: 0;
+}
+

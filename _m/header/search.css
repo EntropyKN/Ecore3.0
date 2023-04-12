@@ -1,0 +1,223 @@
+
+
+#hd_searchCont {
+    height: 6px;
+    left: 136px;
+    min-width: 21px;
+    position: absolute;
+    top: 13px;
+}
+#hd_searchCont #headSearchI{ /*searchHeadOff*/
+	background:transparent url("/cpimg/ico/searchHeadOff.png?") no-repeat scroll center center; 
+	float: right;
+	height: 20px;
+	width: 20px;margin-top: -2px; display:none
+	
+}
+
+#hd_searchCont #Q {
+    border: 0 none;
+    border-radius: 2px;
+    color: #444444;
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 13px;
+    height: 27px;
+    margin: 0 5px 0 0;
+    padding: 0 5px;
+    width: 200px;
+}
+#hd_searchCont #QFake {
+    border: 0 none;
+    color: #999999;
+    font-size: 12px;
+    height: 12px;
+    left: 5px;
+    position: absolute;
+    top: 6px;
+}
+#hd_searchCont #headSearchI:hover{background:transparent url("/cpimg/ico/searchHeadOn.png?") no-repeat scroll center center; }
+
+
+
+
+.hd_notification_linelink {
+    border-bottom: 1px solid #efefef;
+    color: #333333;
+    display: inline-block;
+    float: left;
+    padding-bottom: 4px;
+    padding-top: 2px;
+    position: relative;
+    width: 100%;
+}
+
+/***************************/
+#notifications_header{
+  background-color:#FFFFFF;
+  font-size:13px;
+  height:21px;
+  padding-left:9px;
+  padding-top:4px;
+  position:absolute;
+  width:421px;
+  z-index:1;
+  font-weight:bold;
+  border-bottom:1px solid #EEE
+}
+#hd_notifications_box{
+  background-color:#FFFFFF;
+  height:374px;
+  margin-top:25px;
+  overflow-x:auto;
+  padding:0;
+  width:430px;
+}
+	#hd_notifications_box .loading{
+  color:#CCC;
+  font-size:21px;
+  margin:43px 0 10px 91px;
+	}
+
+#hd_searchRes_box_cont .noResults {
+    color: #959595;
+    float: left;
+    font-size: 16px;
+    margin: 5px 15px;
+    text-align: left;
+    width: 100px;
+}
+	.hd_notification_linelink{
+  display:inline-block;
+float:left;
+  padding-bottom:4px;
+  padding-top:2px;
+border-bottom:1px solid #EFEFEF;
+  width:100%;color:#333333;position: relative;
+  cursor:pointer;
+	}
+	.hd_notification_linelink:hover, 
+	.autoSelectHover{text-decoration:none; background-color:#386916;color:#FFF}
+	.autoSelectHover span{color:#DDD}
+	
+	#hd_notifications_box .not_read{background-color:#D0DEF4}
+	#hd_notifications_box .not_read:hover{text-decoration:none; background-color:#386916;color:#FFF}
+
+.hd_notification_linelink .userRateUp,
+/*#444444*/
+.hd_notification_linelink .userRateDown {
+   background-color:#900;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    left: 5px;
+    position: absolute;
+    text-align: center;
+    top: 37px;
+    width: 50px;
+}
+.hd_notification_linelink .userRateDown{background-color:#030}
+.hd_notification_linelink .userRateText{
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    left: 5px;
+    position: absolute;
+    text-align: center;
+    top: 38px;
+    width: 50px;
+}
+
+	
+	.hd_notification_linelink .hd_notification_text{
+float: left;
+font-size: 12px;
+line-height: 15px;
+margin-bottom: -2px;
+margin-top: 4px;
+width: 250px;
+	}	.hd_notification_text span{font-weight:bold}
+	.hd_notification_linelink .hd_notification_date{
+  color:#999;
+  display:list-item;
+  font-size:10px;
+  list-style:none;
+	}
+	.hd_notification_linelink:hover .hd_notification_date{color:#DDD}
+	.hd_notification_linelink  .hd_notification_lineImg{
+	float:left;margin:5px 7px 0 5px;
+	}
+	.hd_notification_linelink .hd_notification_text .hd_notification_L{ float:right; background-color:#CCC; width:15px; height:13px; font-size:9px}
+
+/*#hd_settings_box,*/
+#hd_notifications_box{
+ background-color: #FFF;
+  position:absolute;
+  left:0px;
+  top:0px;
+  height:50px;
+  padding:10px;
+width: 180px;
+}
+/*************************  HEAD SEARCH  **************************/
+#hd_nav_notifications_box_cont {display: none;left:113px;width:430px;height:400px;}
+#hd_searchRes_box_cont {
+    height: 56px;
+    left: 133px;
+    overflow-x: auto;
+    top: 41px;
+    width: 300px;
+    z-index: 2;
+	
+}
+
+/*.serchResLine {
+    border-bottom: 1px solid #EFEFEF;
+    color: #333333;
+    display: inline-block;
+    float: left;
+    padding-bottom: 4px;
+    padding-top: 2px;
+    position: relative;
+    width: 100%;
+}
+*/
+#hd_searchRes_box_cont .hd_notification_linelink{
+	padding-bottom: 2px;
+	padding-top: 0;
+}
+
+#hd_searchRes_box_cont .hd_notification_linelink .hd_notification_lineImg {
+    float: left;
+    margin: 3px 8px 1px 5px
+}
+
+#hd_searchRes_box_cont .hd_notification_linelink .hd_searchRes_box_cont{
+background-color:#FF9;
+}
+#hd_searchRes_box_cont .hd_notification_linelink .hd_notification_text{
+    font-size: 13px;
+   /* width: 321px;*/
+	padding:0 10px
+}
+
+#hd_searchRes_box_cont .hd_notification_linelink .hd_notification_date {
+    padding:0 10px;
+    float: left;
+    margin-bottom: 0;
+    margin-right: 7px;
+    text-align: left;
+   /* width: 314px;*/
+}
+
+#hd_searchRes_box_cont .noResults {
+    color: #666666;
+    font-size: 14px;
+    margin: 5px 15px;
+}
+#hd_searchCont #searchHeadLoading {
+    position: absolute;
+    right: 12px;
+    top: 2px;
+}
