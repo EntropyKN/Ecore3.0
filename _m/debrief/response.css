@@ -18,13 +18,18 @@
 }
 /****************/
 
-
+.graphExplain {
+    color: #777;
+    margin: -21px 0 19px 69px;
+    float: left;
+    font-size: 12px;
+}
 span#mask1 {
     position: absolute;
     width: 70px;
-    height: 41px;
+    height: 73px;
     background: #fff;
-    top: -46px;
+    top: -76px;
     cursor: default;
 }
 #dialog small {

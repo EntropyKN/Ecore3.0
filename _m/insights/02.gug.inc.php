@@ -5,10 +5,10 @@ require_once(C_ROOT."/_m/insights/global.inc.php");
 
 
 if ($_SESSION["ulevel"]==0	)	{
-	$D=getGamesUserFromGroups($_SESSION["insights"]["groups"]);
+	if ($_SESSION["insights"]["groups"]) $D=getGamesUserFromGroups($_SESSION["insights"]["groups"]);
 }else{
 	$D=getGamesUserFromGroups("ALL");	
-//	die("ALL");
+
 }
 $D["idsusers"]=array();
 $D["idsgroups"]=array();
@@ -23,8 +23,9 @@ var group_user='.json_encode($D["group_user"]).';</script>';
 
 
 $O.='<div class="clear"></div>';
-$O.='<div id="gug">'; 
 
+$O.='<div id="gug">'; 
+if (!empty ($D["groups"]))  {    
 	$O.='<div id="groupss">'; 
 		$O.='<div class="stit">'.L_groups .'	<span id="group_sel">'.sizeof(	$D["groups"]			).'</span>/<span id="group_tot">'.sizeof(	$D["groups"]			).'</span><a class="latChoice" id="allgroups" href="#">'.L_all.'</a> <a class="latChoice" id="nogroups" href="#">'.L_none.'</a></div>';
 		
@@ -69,7 +70,10 @@ $O.='<div id="gug">';
 		$O.="</div>";		
 	$O.="</div>";
 
-
+}else{
+    $O.="Please, <a href=\"/?/groups/\">create groups</a> to get the complete insights options";
+    
+}
 $O.="</div>";
 
 

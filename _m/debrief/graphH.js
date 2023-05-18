@@ -30,7 +30,9 @@ cursor.lineY.set("visible", false);
 
 // Create axes
 // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+var xRenderer = am5xy.AxisRendererX.new(
+root
+, { minGridDistance: 30 });
 xRenderer.labels.template.setAll({
   rotation: 0,
   //centerY: am5.p50,
@@ -50,6 +52,18 @@ var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
   renderer: am5xy.AxisRendererY.new(root, {})
 }));
 
+
+var yRenderer = am5xy.AxisRendererY.new(root, {})
+//yRenderer.labels.template.set('visible', false) //////////////// NO Y GRID
+
+
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+    min: 0,
+    max: 100,
+  renderer: yRenderer
+}));
+//////////////////
 
 // Create series
 // https://www.amcharts.com/docs/v5/charts/xy-chart/series/     https://www.amcharts.com/docs/v5/concepts/common-elements/labels/
@@ -78,6 +92,7 @@ series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
 });
 */
 series.columns.template.adapters.add("stroke", function(stroke, target) {
+        
   return chart.get("colors").getIndex(series.columns.indexOf(target));
 });
 
@@ -87,7 +102,7 @@ series.columns.template.adapters.add("stroke", function(stroke, target) {
 var data = [{
   name: "1",
   Q: "Arrediamo insieme questo posto?",
-  steps: 18
+  steps: 25
 }, {
   name: "2",
   Q: "aosdkalskjdals dajlkasd asldkj asldkj asdlkasklj das",
@@ -96,11 +111,14 @@ var data = [{
   name: "3",
   Q: "aosdkalskjdals dajlkasd asldkj asldkj asdlkasklj das",
   steps: 100
-}, {
+},
+*/
+/* {
   name  : "4",
   Q: "aosdkalskjdals dajlkasd asldkj asldkj asdlkasklj das",
   steps: 70
 }
+
 , {
   name  : "5",
   Q: "aosdkalskjdals dajlkasd asldkj asldkj asdlkasklj das",
@@ -111,22 +129,27 @@ var data = [{
   Q: "aosdkalskjdals dajlkasd asldkj asldkj asdlkasklj das",
   steps: 85
 }
-
-];
 */
+//];
+
 var i
 var winningPercStart=data[0]["winningPercStart"]
-if (!winningPercStart) winningPercStart=50.00
+if (!winningPercStart) winningPercStart=75.00
 
 for (i = 0; i < data.length; i++) {
     data[i]["steps"]=parseFloat(data[i]["steps"])
-    //console.log(data[i]["steps"]);
+    //console.log(i, data[i]["steps"]);
 } 
 
 series.set("heatRules", [{
   target: series.columns.template,
   dataField: "valueY",
   customFunction: function(sprite, min, max, value) {
+          if (value < winningPercStart) 
+            sprite.set("fill", am5.color(0xDC3912));
+        else
+            sprite.set("fill", am5.color(0x008000));
+  
   /*
 #L1{background-color:#dc3912;height: 55px;}
 #L2{background-color:#eb4821;height: 44px;}
@@ -139,7 +162,7 @@ series.set("heatRules", [{
 #W4{background-color:#008000;height: 55px;}
 
   */
-    if (winningPercStart==50.00) {
+    /*if (winningPercStart==50.00) {
         if (value < 12.5) sprite.set("fill", am5.color(0xdc3912));
         if (value >= 12.5 && value < 25) sprite.set("fill", am5.color(0xeb4821));
         if (value >= 25 && value < 37.5) sprite.set("fill", am5.color(0xfb5831));
@@ -157,6 +180,7 @@ series.set("heatRules", [{
             sprite.set("fill", am5.color(0x008000));
     
     }
+    */
   }
 }])
 xAxis.data.setAll(data);
