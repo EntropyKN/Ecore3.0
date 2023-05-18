@@ -1,28 +1,9 @@
 <?php
 $JSA[]=''.C_DIR.'/_m/insights/insights.js?'.PAGE_RANDOM;
 
-$JSA[]='/js/plugins/gloader.js'; 
-//$JSA[]='https://www.gstatic.com/charts/loader.js?';
-$CSSA[]=''.C_DIR.'/_m/insights/insights.css';
+$JSA[]='/js/plugins/gloader.js'; //$JSA[]='https://www.gstatic.com/charts/loader.js?';
+$CSSA[]=''.C_DIR.'/_m/insights/insights.css?2023';
 
-
-//require_once(C_ROOT."/config/php.function.group.php");
-
-/*
-https://palma.entropy4fad.it/?/insights
-/custom_0
-/views
-/0
-/01-02-2017
-/07-03-2017
-
-
-https://palma.entropy4fad.it/?/insights
-/week_2
-/views
-/0
-michele molina
-*/
 
 $page["titlePre"]=L_insights." ";
 
@@ -38,6 +19,8 @@ $O.='<div id="core" data-idtrans="'.$idtrans.'" data-tsaved="'.$tsaved.'">';
 		$O.="<br />".L_actually_you_have_no_permission_to_access_this_area;
 		$O.='</div>';	
 	}else{
+    
+        
 		require_once(C_ROOT."/_m/insights/01.menu.time.inc.php");
 		require_once(C_ROOT."/_m/insights/02.gug.inc.php");
 		//$O.="insights ";
@@ -58,8 +41,13 @@ $O.='<div class="chart" id="chart3">Graphs3</div>';
 $O.='<div class="clear"></div>';
 $O.='<div class="chartSub" id="chartSub3">'.L_durations_are_expressed_in_minutes.'</div>';
 
+    $O.='<pre>'.print_r($_SESSION,true).'</pre>';
+		$O.='<pre>
+		//// data
+		'.print_r($D,true).'</pre>';
+        
 // debug
-if ($_COOKIE["debug"]) { 
+/*if (!$_COOKIE["debug"]) { 
 		$O.='<div class="clear"></div>';
 		//$O.='<pre>'.print_r($_SESSION,true).'</pre>';
 		//$O.='<pre>'.print_r($COM,true).'</pre>';
@@ -69,7 +57,7 @@ if ($_COOKIE["debug"]) {
 		$O.='<pre>
 		//// data
 		'.print_r($D,true).'</pre>';	
-}
+}*/
 // core coreIn
 $O.='</div>';	
 $O.='</div>';	

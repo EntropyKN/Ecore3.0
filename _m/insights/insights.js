@@ -273,6 +273,7 @@ $(function() {
 				
 				$("#chart1").show();
 				var D=JSON.parse(r[2])
+                console.log ("jsonD",D)
 				var data = google.visualization.arrayToDataTable(D);
 				var options = {
 				animation: {
@@ -292,10 +293,12 @@ $(function() {
 				chart.draw(data, options);	
 			} //r[2]
 
-			if (r[3]!=0) {
-				//alert (r[3])
+			/*if (r[3]!=0) {
+				//console.log ("array",r[3])
 				$("#chart2").show();
 				var D1=JSON.parse(r[3])
+                //alert (D1)
+                console.log ("jsonD1",D1)
 				var data1 = google.visualization.arrayToDataTable(D1);
 				var options1 = {
 				// title: 'Chess opening moves',
@@ -315,12 +318,46 @@ $(function() {
 				
      		 var view = new google.visualization.DataView(data1);
 				var chart2 = new google.visualization.ColumnChart(document.getElementById('chart2'))
+                
 				chart2.draw(view, options1);	
 			} 
+            */
+            // NEW
+			if (r[3]!=0) {
+				//alert (r[4])
+				$("#chart2,#chartSub2").show();
+				var D2=JSON.parse(r[3])
+                console.log ("jsonD3",D2)
+				var data2 = google.visualization.arrayToDataTable(D2);
+				var options2 = {
+				animation: {
+					  duration: 1000,
+					  easing: 'out',
+					  startup: true
+				  },
+				pointsVisible:true,
+                title: "Percentuale di giocatori negli 8 intervalli per game",
+				//colors:['#FBD842','#0039ba','#45A245'/*#859868*/,'brown'],	//#45A245 green	#FBD842 yellow #DC3912 red
+                //colors:['#dc3912','#eb4821','#fb5831', '#ff7a53',     '#27A727','#139313','#178A17', '#008000'],
+                colors:['#dc3912','#eb4821','#fb5831', '#ff7a53',     '#ff7a53','#ff7a53','#27A727', '#008000'],
+				  vAxis: {minValue: 0}				  
+				  ,isStacked: 'percent'
+                  ,legend: { position: "none" }
+				  //,legend: {position: 'top', alignment: 'end', maxLines: 1}
+				   ,'chartArea': {left:40,right:0,'height': '70%','width': '86%',}
+				};
+				var chart2 = new google.visualization.ColumnChart(document.getElementById('chart2'))
+				chart2.draw(data2, options2);	
+			}else{ //r[4]
+				$("#chartSub2")	.hide();
+			}//
+            
+            
 			if (r[4]!=0) {
 				//alert (r[4])
 				$("#chart3,#chartSub3").show();
 				var D2=JSON.parse(r[4])
+                console.log ("jsonD2",D2)
 				var data2 = google.visualization.arrayToDataTable(D2);
 				var options2 = {
 				animation: {

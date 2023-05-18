@@ -65,17 +65,18 @@ while (	$S=sql_assoc($SQ)	){
 	
 
 		
-	$fieldMiss=$fieldMissNoType;if ($S["type"]) $fieldMiss=$fieldMissYesType;
-	
-
+	$fieldMiss=$fieldMissNoType;
+    if ($S["type"]) $fieldMiss=$fieldMissYesType;
 	
 
 	
 	foreach($fieldMiss as $field => $text){
 		$response=true;
-		if  (!$S[$field] && $field!="ascore_1" && $field!="ascore_2") 															$response=false;
+		if  (!$S[$field] && $field!="ascore_1" && $field!="ascore_2") 														$response=false;
 		if (!is_numeric($S[$field]) && ($field=="ascore_1" || $field=="ascore_2")					)	 					$response=false;
-				
+        $fieldA=explode("_", $field);
+        if ($fieldA[0]=="answer" && $S[$field]=="0" ) $response=true;
+        
 		if (!$response) {
 			$D["ftext"]=L_step."  ".$S["step"]." ".$S["scene"]."";
 			if ($S["type"]=="winning")  $D["ftext"]=L_winning_end;

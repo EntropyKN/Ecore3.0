@@ -1,3 +1,12 @@
+.googleChartTitle {
+    font: bold 11px Arial;
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    padding-top: 8px;
+}
+
+
 #coreIn {
     padding: 15px 26px 15px 26px;
 }
@@ -22,7 +31,6 @@
 	color: #8B8B8B;
 	/* margin: 0px 0 0 45px; */
 }
-
 .excel {
 	background: #fff url("/img/ico/excel28.png") no-repeat scroll 3px 0 / 21px 21px;
 	/* height: 72px; */
@@ -31,6 +39,20 @@
 	font-size: 17px;
 	margin: 5px 0 0 0;
 }
+
+.excel {
+    background: #fff url("/img/ico/excel28.png") no-repeat scroll 3px 0 / 21px 21px;
+    height: 21px;
+    width: 28px;
+    padding: 0px 0 0 30px;
+    float: right;
+    font-size: 17px;
+    margin: 5px 0 0 0;
+    position: absolute;
+    top: 12px;
+    left: 783px;
+}
+
 #ids_group,#ids_user,#ids_gym{
 	display:none;
 }

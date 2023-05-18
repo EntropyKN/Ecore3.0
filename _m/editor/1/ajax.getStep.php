@@ -5,6 +5,30 @@ include_once($_SERVER['DOCUMENT_ROOT']."/config/config.inc.php");
 if (!loggedIn()) die("false|-|you are not logged");
 if ($_SESSION["ulevel"]<1) die("false|-|you don't have the right permissions");
 
+function notNullAnswers($s=array()){
+    if (!$s) return $s;
+    $a=array();
+    foreach($s as $key => $value){    
+
+            $keyA=explode("_", $key);
+            if (
+                is_null( $value)  && 
+                ($keyA[0]=="answer" || $keyA[1]=="comment" )
+                ) 
+                    $value="";
+            $a[$key]=$value;      
+        
+    }
+    if ($a["game"]) foreach($a["game"] as $key => $value){ 
+        if (!$a["game"][$key]) $a["game"][$key]="";
+    }
+
+
+    
+    return $a;
+}
+
+
 $post=array_map("trim",$_POST);
 
 $strG="SELECT gm.* , s.name as scenarioName FROM games_steps gm 
@@ -31,7 +55,7 @@ $D["data"]["linkRef"]=rawurlencode(crypta($D["data"]["linkRefC"])); //unset ($D[
 $D["post"]=$post;
 $D["Q1"]=$strG;
 echo "true|-|";
-echo json_encode($D["data"]);
+echo json_encode(notNullAnswers($D["data"]));
 
 echo "|-|";print_r($D);
 

@@ -55,7 +55,11 @@ function gameIntervalCalc2($gameId){
 	while (	$S=sql_assoc($Q)	){
 		$S=array_map("trim", $S);
 		$S["questNumb"]=3;if ($S["goto4"]) $S["questNumb"]=4;
-			
+        if ($S["answer_1"] =="0") $S["answer_1"]="zero";
+        if ($S["answer_2"] =="0") $S["answer_2"]="zero";
+        if ($S["answer_3"] =="0") $S["answer_3"]="zero";
+        if ($S["answer_4"] =="0") $S["answer_4"]="zero";
+
 		// TESTO DOMANDE
 		if ($S["questNumb"]==3) {
 			if (	!$S["answer_1"] || !$S["answer_2"] || !$S["answer_3"]  ){
