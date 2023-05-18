@@ -73,39 +73,40 @@ function getGamesUserFromGroups ($idGroupsArray, $cmd=false) {
 	//unset ($D["grupsQ"]);
 	
 	### Gyms
-	$D["gymsQ"]="SELECT  G.title, G.gameId, G.status 
-	FROM games G
-	WHERE  G.status!='draft' AND  G.status!='deleted' AND G.gameId IN 
-	(SELECT 
-	DISTINCT GG.gameId
-	FROM game_usersgroups GG
-	WHERE GG.idgroup IN (".@implode(", ", $idGroupsArray).") 
-	)
-	ORDER BY title ASC ";
-	$q=sql_query($D["gymsQ"]);
-	if (sql_error()) $D["gymsQe"]=sql_error();
-	while ($GY=sql_fetch_assoc(	$q	)){
-		$D["gyms"][]=$GY;
-		$D["ids_gym"][]=$GY["gameId"];
-	}	
-	//unset ($D["gymsQ"]);	
-	
-	### USERS
-	$D["usersQ"]="SELECT Concat (U.user_real_name, ' ', U.user_real_surname) name ,  U.users_id uid, U.sex, U.user_email as email 
-	FROM users U WHERE U.users_id IN
-	(SELECT 
-	DISTINCT UG.uid
-	FROM user_usersgroups UG
-	WHERE UG.idgroup IN (".@implode(", ", $idGroupsArray).") 
-	) ORDER BY name ASC";
-	$q=sql_query($D["usersQ"]);
-	if (sql_error()) $D["usersQe"]=sql_error();
-	while ($GY=sql_fetch_assoc(	$q	)){
-		$D["users"][]=$GY;
-		$D["ids_user"][]=$GY["uid"];
-	}
-	//unset ($D["usersQ"]);	
-	
+    if (!empty($idGroupsArray)) {
+        $D["gymsQ"]="SELECT  G.title, G.gameId, G.status 
+        FROM games G
+        WHERE  G.status!='draft' AND  G.status!='deleted' AND G.gameId IN 
+        (SELECT 
+        DISTINCT GG.gameId
+        FROM game_usersgroups GG
+        WHERE GG.idgroup IN (".@implode(", ", $idGroupsArray).") 
+        )
+        ORDER BY title ASC ";
+        $q=sql_query($D["gymsQ"]);
+        if (sql_error()) $D["gymsQe"]=sql_error();
+        while ($GY=sql_fetch_assoc(	$q	)){
+            $D["gyms"][]=$GY;
+            $D["ids_gym"][]=$GY["gameId"];
+        }	
+        //unset ($D["gymsQ"]);	
+
+        ### USERS
+        $D["usersQ"]="SELECT Concat (U.user_real_name, ' ', U.user_real_surname) name ,  U.users_id uid, U.sex, U.user_email as email 
+        FROM users U WHERE U.users_id IN
+        (SELECT 
+        DISTINCT UG.uid
+        FROM user_usersgroups UG
+        WHERE UG.idgroup IN (".@implode(", ", $idGroupsArray).") 
+        ) ORDER BY name ASC";
+        $q=sql_query($D["usersQ"]);
+        if (sql_error()) $D["usersQe"]=sql_error();
+        while ($GY=sql_fetch_assoc(	$q	)){
+            $D["users"][]=$GY;
+            $D["ids_user"][]=$GY["uid"];
+        }
+	   //unset ($D["usersQ"]);	
+	} //if (!empty(idGroupsArray)) {
 	
 	
 	///////////////////////////////////// gyms with no groups

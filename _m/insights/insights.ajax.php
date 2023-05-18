@@ -20,17 +20,7 @@ require_once("insights.elaborate.php");
 
 // html
 $O="";
-/*$O.='<div class="title">Report:';
-if (		sizeof(	$D["r"])) {
-	$O.='<a class="excel" href="/export/insights.php?
-cfrom='.$D["cfrom"].'
-&cto='.$D["cto"].'
-&ids_group='.$D["ids_group"].'
-&ids_user='.$D["ids_user"].'
-&ids_gym='.$D["ids_gym"].'" target="_blank">Download</a>';
-}
-$O.='</div>';
-*/
+
 if (!		sizeof(	$D["r"])) {
 	
 	$O.='<div class="insightBoxStright">';
@@ -45,6 +35,10 @@ if (!		sizeof(	$D["r"])) {
 
 $O.='<div class="insightBoxStright">';
 	$O.="<span>".L_matches.":</span> ".sizeof($D["r"]);
+
+    $O.='<a class="excel" href="/export/insights.php?cfrom='.$D["cfrom"].'&cto='.$D["cto"].'&ids_group='.$D["ids_group"].'&ids_user='.$D["ids_user"].'&ids_gym='.$D["ids_gym"].'" target="_blank"></a>';
+
+    
 $O.='</div>';
 
 $O.='<div class="insightBox">';
@@ -116,7 +110,7 @@ $O.='</div>';
 ///////////////////////////////////////////////////////////////////// Gyms
 $O.='<div class="insightBox">';
 	$O.='<div class="insightBoxT">';
-			$O.="<span>".L_games.":</span> ".sizeof($D["idgyms"]);
+			$O.="<span>".L_games.":</span> ".sizeof($D["gameIds"]);
 	$O.='</div>';
 	$O.='<div class="insightBoxC">';
 
@@ -239,6 +233,7 @@ if ($D["gymReport"]	&& sizeof(	$D["r"]) ) {
 
 	$chart2data[0]=array(L_games, L_L1, L_L2, L_L3, L_L4, L_W1, L_W2, L_W3, L_W4); // , "{role: 'annotation'}"
 
+    //$chart2data[0]=array(L_games, "test","","","","","","",""); 
 	foreach( $D["gymReport"] as $k => $v ) {
 		//if (!$v["assertive"]) $v["assertive"]=0;if (!$v["submissive"]) $v["submissive"]=0;if (!$v["aggressive"]) $v["aggressive"]=0;
 		foreach( $finalS as $FK => $FF ){

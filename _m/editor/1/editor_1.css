@@ -1900,7 +1900,7 @@ display: none;position: relative;
 #downContainerStatus .downContainerIN {
 	padding: 0 26px 0 56px;
 }
-/*****************************/
+/****************transform: scaleX(-1); *************/
 
 #fgraph {
 	width: 600px;
@@ -1912,7 +1912,7 @@ display: none;position: relative;
 	display: none;
 }
 #loosing {
-	width: 300px;
+	width: 450px;
 	height: 150px;
 	background: #dc3912;
 	float:left;
@@ -1925,7 +1925,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00dc3912', e
 	
 	
 }#winning {
-	width: 300px;
+    overflow: hidden;
+	width: 150px;
 	height: 150px;
 	background: #008000;
 	float:right;
@@ -1959,8 +1960,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00008000', e
 	position: absolute;
 	cursor: pointer;
 	margin: 32px 0 0 55px;
-	border-radius: 10px;
-	
+	border-radius: 10px;transform: scaleX(-1)
+}
+#boxScenarioLose {
+    position: absolute;
+    left: 100px;
 }
 .isScenario{
 border:1px solid #555!important ;
@@ -1987,10 +1991,10 @@ border:1px solid #555!important ;
 
 #gSeparator50 {
 	left: 300px;
-
+    left: 450px;
 }
 #gLegend50 {
-	left: 250px;
+	left: 400px;
 	width: 100px;
 	text-align: center;
 }
@@ -2037,9 +2041,19 @@ border:1px solid #555!important ;
 #L2{background-color:#eb4821;height: 44px;}
 #L3{background-color:#fb5831;height: 35px;}
 #L4{background-color:#ff7a53;height: 25px;}
-
+#W1{
+background-color:#ff7a53;height: 20px;
+border-radius: 0 0 8px 0;;position:relative;color: #fff;
+}
+#W2{
+background-color:#ff7a53;height: 16px;
+border-radius: 0 0 8px 0;;position:relative;color: #fff;
+}
+/*
 #W1{background-color:#27A727;height: 25px;}
 #W2{background-color:#139313;height: 35px;}
+*/
+
 #W3{background-color:#178A17;height: 45px;}
 #W4{background-color:#008000;height: 55px;}
 	

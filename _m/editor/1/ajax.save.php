@@ -16,7 +16,7 @@ if (!$D["table"]) {
 		
 		if (		$D["what"]!="compulsoryAttachments" && $D["what"]!="ascore_1" && $D["what"]!="ascore_2" && $D["what"]!="ascore_3" && $D["what"]!="ascore_4") {
 			
-			if (!$D["val"]) 
+			if (!$D["val"] && $D["val"]!="0") 
                 $D["Q"]="update games_steps set ".$D["what"]."=NULL WHERE gameId=".$D["gameId"]." AND step=".$D["step"]." AND scene='".$D["scene"]."' ";
 			else
 			 $D["Q"]="/* ".$D["step"]."-".$D["scene"]." ".$D["what"]." */ 

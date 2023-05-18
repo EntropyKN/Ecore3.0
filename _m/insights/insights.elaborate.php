@@ -87,7 +87,9 @@ gli utenti sono presi dai gruppi
 
 m.scoreTotal, m.scoreInterval, 
 */
-
+function timestamp2insights($ts){
+    return date("d/m/y",$ts)." ".@date("H:i",$ts);
+}
 
 $D["Q"]="SELECT  
 m.idm, m.uid, m.final,
@@ -156,8 +158,8 @@ $D["userReport"]=array();
 //$D["res"]["user"]
 
 while (	$d=sql_fetch_assoc($q)) {
-	$d["from"]=timestamp2red($d["startTime"], "excel", LANG);
-	$d["to"]=timestamp2red($d["endTime"], "excel", LANG);
+	$d["from"]=timestamp2insights($d["startTime"], "excel", LANG);
+	$d["to"]=timestamp2insights($d["endTime"], "excel", LANG);
 	$d["secs"]=$d["endTime"]-$d["startTime"];
 	if ($d["secs"]<0) $d["secs"]=0;
 	$d["score"]="wip";
@@ -217,7 +219,10 @@ if ($D["gymReport"]) foreach( $D["gymReport"] as $k => $v ) {
 
 	foreach( $finalS as $FK => $FF ){
 		if ($D["gymReport"][$k	][$FF]) 
-			$D["gymReport"][$k	][$FF."P"]=$D["gymReport"][$k	][$FF]/$D["gymReport"][$k	]["Nmatches"];	
+			$D["gymReport"][$k	][$FF."P"]=round(
+            ($D["gymReport"][$k	][$FF]/$D["gymReport"][$k	]["Nmatches"])
+            
+            ,3);	
 	}
 	
 /*	$D["gymReport"][$k	]["assertiveP"]=0;
