@@ -263,6 +263,7 @@ $O.='<div class="commentQ">'.$D["comment"]	.'</div>';
 if (!$D["game"]["dontShowDebriefScore"]) {
     $O.='<div id="chartdiv" style="margin:20px 0;width: 100%;height:236px;"></div>';
     $O.='<div class="clear"></div>';
+    $O.='<div class="graphExplain">'.L_debrief_graph_explain.'</div>';
 }else{
 
     $O.='<div class="clear" style="margin:25px 0 0 0"></div>';

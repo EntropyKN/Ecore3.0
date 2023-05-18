@@ -179,9 +179,11 @@ $(function() {
 		$("#avatarSprite").attr("data-currentSize", size);	
         
         // avatar position
+        if (!avatar_pos) avatar_pos="264,3"
+        
         var avatarC=avatar_pos.split(",")
         var $factorResize=2;
-		$("#avatarSprite,#avatarSpriteTalk").attr("style", "left: "+avatarC[0]*$factorResize+"px;top: "+avatarC[1]*$factorResize+"px;" ) 
+        $("#avatarSprite,#avatarSpriteTalk").attr("style", "left: "+avatarC[0]*$factorResize+"px;top: "+avatarC[1]*$factorResize+"px;" ) 
 		
 		// ballon 
          var balloonC=balloon_pos.split(",")

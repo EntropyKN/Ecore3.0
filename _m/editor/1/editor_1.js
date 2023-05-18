@@ -554,7 +554,12 @@ $(function() {
 //					alert (r[1])
 					var SC=$.parseJSON(r[1])
 					$("#gLegend100 .subGlegend span").text(SC.W4.spreadR )
-					$("#gLegend50 .subGlegend span").text(SC.L4.spreadR )
+					//$("#gLegend50 .subGlegend span").text(SC.L4.spreadR )
+//                    $("#gLegend50 .subGlegend span").text(SC.W2.spreadR )
+//                    $("#gLegend50 .subGlegend").html("75%<span>"+SC.W2.spreadR+"</span>" )
+                    $("#gLegend50").html('75%<div class="subGlegend">Score:<span>'+SC.W2.spreadR+'</span></div>')
+  
+  
 					$("#gLegend0 .subGlegend span").text(SC.L1.spreadL)
 /*					$.each(SC.W4, function(i2, v) {
 						(i2+" "+v);
@@ -697,7 +702,7 @@ $(function() {
 			,data: {gameId:D["gameId"], step:step, scene:scene, action:"getStep"} //
 			,cache: false,dataType: 'html',
 			success: function(php_answer){
-
+                //console.log(php_answer)
 				r=php_answer.split("|-|")
 				//$("#debug").html(id)
 				IDC=id.split("_");
