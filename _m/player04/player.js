@@ -1,5 +1,5 @@
 $(function() {
-    ///if (typeof G === 'undefined' || G === null) var G;
+    ///update 2023-05-23
 	var $pconsol=$("#playerConsoleCont");
 	var debug=$("#debug")
 
@@ -134,8 +134,11 @@ $(function() {
 	})	
 	
     var showFeedback=function(stepDone, answerN) {
-        var $sayFeedback=S["A"][stepDone][    "feedback_"+answerN ];
-        var goto=S["A"][stepDone][    "goto"+answerN ];
+    
+        var sceneGetF=$("#currentscene").val();
+        if (sceneGetF!="A" && sceneGetF!="B" && sceneGetF!="C" && sceneGetF!="D" ) sceneGetF="A"
+        var $sayFeedback=S[sceneGetF][stepDone][    "feedback_"+answerN ];
+        var goto=S[sceneGetF][stepDone][    "goto"+answerN ];
         $("#attachShow").fadeOut();
         
         //$("#playmask").fadeIn(100);//.promise().done(function(  ) {                            })
@@ -175,7 +178,7 @@ $(function() {
             $("#rightArrow,#leftArrow").hide();
         }
 
-        $("#aansw").attr("src", "/data/audio/"+S["A"][stepDone][    "feedback_"+answerN+"_audio" ]+"?"+Math.random()			)	// audio
+        $("#aansw").attr("src", "/data/audio/"+S[sceneGetF][stepDone][    "feedback_"+answerN+"_audio" ]+"?"+Math.random()			)	// audio
 		$( "#mask" ).fadeOut('fast')
 		$pconsol.hide();
 
@@ -188,9 +191,9 @@ $(function() {
 		
 		
 		$pconsol.fadeOut("fast")
-        if (S["A"][stepDone][    "feedback_"+answerN+"_scenario"]){
+        if (S[sceneGetF][stepDone][    "feedback_"+answerN+"_scenario"]){
          //   alert (S["A"][stepDone][    "feedback_"+answerN+"_scenario"] )
-            $("#scenario").attr("src",S["A"][stepDone][    "feedback_"+answerN+"_scenario"]).fadeIn();
+            $("#scenario").attr("src",S[sceneGetF][stepDone][    "feedback_"+answerN+"_scenario"]).fadeIn();
         }        
         
         
@@ -366,9 +369,11 @@ $(function() {
 				if (data["cmd"]=="stepon") {///////////////////////////////////////////
 					//Slert ("stepon") 
 					//stepNext=data["stepIndex"]+1;
+                    var sceneGetF=$("#currentscene").val();
+                    
                     var stepDone=parseInt($pconsol.attr("data-step"));
 					var stepNext=stepDone+1
-                    var $sayFeedback=S["A"][stepDone][    "feedback_"+data["answer"]  ];
+                    var $sayFeedback=S[sceneGetF][stepDone][    "feedback_"+data["answer"]  ];
 
                     if ($sayFeedback) {
                         // FEEDBACK
@@ -479,6 +484,7 @@ $(function() {
 			if (isFinal) {
                 $("#debriefsplash").attr("data-visible",1)
                 $(".showLastExc").hide()
+                $("#balloon").remove() // 2023-05-23
 				window.setTimeout(function() { 
 					$("#mask, #explain").hide()
                     
@@ -650,7 +656,6 @@ $(function() {
                 $("#playerConsoleCont").hide();
             }
         }
-		
 	})	
 	$('#infoChars').on('click',function(e){e.preventDefault();		
 		$('#explainH a, #logshow').removeClass("onA").removeClass("onB")
