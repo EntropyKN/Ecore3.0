@@ -768,6 +768,7 @@ $(function() {
 	})		
 	var writeDB=null;
     
+    
 	$("#avatar_sentence").on("keyup", function(e) {
 		if ($(this).val().length>=800) alert ("There's a limit of 800 digits for this area");
 		$("#balloon span").html(adaptTex2Balloon($(this).val()))
@@ -777,7 +778,7 @@ $(function() {
 			}, 1000);		
 	})
     
-    
+    var generateAudioFeedTimer=null;
 	$(".textarea_fb").on("keyup", function(e) {
         var thisid=this.id.replace("answerFeedback_","feedback_");
         //console.log ("change key")
@@ -788,6 +789,15 @@ $(function() {
             //alert (thisid+" "+vali)
             save (thisid, vali)
         }, 1000);
+        
+        clearTimeout(generateAudioFeedTimer);
+        
+        generateAudioFeedTimer = setTimeout(function(){     
+            var thisidA=thisid.replace("feedback_","");
+           //   console.log ("this id A", thisidA)
+            generateAudioFeedback(thisidA);
+        }, 1500);        
+        
 	}).on("blur", function(e) {
         var thisid=this.id.replace("answerFeedback_","");
         generateAudioFeedback(thisid);
@@ -896,7 +906,7 @@ $(function() {
     
     var generateAudioFeedback=function(feedbackN){
         if (!feedbackN) return;
-        console.log("generateAudioFeedback "+feedbackN)
+        console.log("generateAudioFeedback "+feedbackN+" "+$("#answerFeedback_"+feedbackN).val()    )
         if ( 
             $("#answerFeedbackSavedAudio_"+feedbackN).val()==$("#answerFeedback_"+feedbackN).val()  
             &&

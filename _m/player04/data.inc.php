@@ -109,6 +109,8 @@ $stepC=0;
 while (	$ST=sql_fetch_assoc($qS)	){
 	
 	$ST["answerN"]=2;if ($ST["answer_3"]) $ST["answerN"]=3;if ($ST["answer_4"]) $ST["answerN"]=4;;if ($ST["answer_5"]) $ST["answerN"]=5;
+    if (!$ST["avatar_pos"]) $ST["avatar_pos"]="264,3";
+    
 	$ST["avatar_posA"]=explode(",",$ST["avatar_pos"] ); $ST["avatar_posA"][0]=$ST["avatar_posA"][0]*$FACTOR;$ST["avatar_posA"][1]=$ST["avatar_posA"][1]*$FACTOR;
 	$ST["balloon_posA"]=explode(",",$ST["balloon_pos"] ); 
 	$ST["balloon_posA"][0]=$ST["balloon_posA"][0]*$FACTOR;
