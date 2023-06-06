@@ -2,9 +2,11 @@
 error_reporting(E_ALL ^ E_NOTICE);ini_set("display_errors",1);
 // https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226
 // https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226&force=1&log=1&NOAUDIOGENERATION
-
-// https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226&NOAUDIOGENERATION=1
-
+/*
+https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226&NOAUDIOGENERATION=1
+https://ecore.sgameup.com/_m/ajax.generatePlayerAudio.php?log=1&gameId=2
+https://ecore.dev.di.unito.it//_m/ajax.generatePlayerAudio.php?log=1&gameId=16
+ */
 //if (!$IDM || !is_numeric($IDM)) header('Content-Type: application/json; charset=utf-8');
 
 $_GET["force"]=1; // GENERA SEMPRE!
@@ -57,6 +59,8 @@ S.gameId= ".db_string($D["gameId"])." order BY step ASC, scene ASC
 
 if ($_GET["force"]) $D["Q"]=str_replace("audioAnwers IS NULL AND ", "", $D["Q"]);
 $D["avatar_voices_used"]=array();
+
+
 //$D["Qe"]=sql_error();
 $SQ=sql_query($D["Q"]);
 $Kstep=0;
@@ -100,12 +104,12 @@ $D["avatar_voices_used"]=array_unique($D["avatar_voices_used"]);
 
 
 // select right avatar voice m & F
-$D["avatar_id_M_dataQ"]=("SELECT id, voiceId_".$D["language"]." from avatars where sex='m' AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
-$D["avatar_id_F_dataQ"]=("SELECT id, voiceId_".$D["language"]." from avatars where sex='f' AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
+//$D["avatar_id_M_dataQ"]=("SELECT id, voiceId_".$D["language"]." from avatars where sex='m' AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
+//$D["avatar_id_F_dataQ"]=("SELECT id, voiceId_".$D["language"]." from avatars where sex='f' AND voiceId_".$D["language"]."!=1000 AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
 
 
 $D["avatar_id_M_data"]=sql_queryt("SELECT id, voiceId_".$D["language"]." from avatars where sex='m' AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
-$D["avatar_id_F_data"]=sql_queryt("SELECT id, voiceId_".$D["language"]." from avatars where sex='f' AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
+$D["avatar_id_F_data"]=sql_queryt("SELECT id, voiceId_".$D["language"]." from avatars where sex='f' AND voiceId_".$D["language"]."!=1000 AND voiceId_".$D["language"]." not in (".implode(", ",$D["avatar_voices_used"] ).") ");
 
 $D["voice_id_M"]=$D["avatar_id_M_data"]["voiceId_".$D["language"]];
 if (!$D["voice_id_M"]){
@@ -115,7 +119,7 @@ if (!$D["voice_id_M"]){
 
 $D["voice_id_F"]=$D["avatar_id_F_data"]["voiceId_".$D["language"]];
 if (!$D["voice_id_F"]){
-    $dvF=sql_queryt("select voiceId_".$D["language"]." from avatars WHERE sex='f' ORDER BY id DESC limit 0,1"); 
+    $dvF=sql_queryt("select voiceId_".$D["language"]." from avatars WHERE sex='f' AND voiceId_".$D["language"]."!=1000 ORDER BY id DESC limit 0,1"); 
     $D["voice_id_F"]=$dvF["voiceId_".$D["language"]];
 }
 
