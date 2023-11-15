@@ -117,7 +117,7 @@ $(function() {
         
         console.log ("loadSeq ", s,"statusBack ", status,"info ", info);
         
-        var audioFile=S[s]["avatar_audio"];
+        var audioFile=S[s]["avatar_audio"]+"?"+Math.random();
         var avatar_id=S[s]["avatar_id"]
         var size=S[s]["avatar_size"]
         var avatar_pos=S[s]["avatar_pos"];
@@ -128,7 +128,7 @@ $(function() {
 
         if (status=="answer")   {
         
-            audioFile=S[s]["answerAudio"];
+            audioFile=S[s]["answerAudio"]+"?"+Math.random();
 
             if (    $("#player").attr("data-sexsession")  =="F" ) {
                 audioFile=S[s]["answerAudio"].replace("M.mp3","F.mp3")
@@ -189,7 +189,7 @@ $(function() {
          var balloonC=balloon_pos.split(",")
 		$("#balloon").attr("style", "left: "+balloonC[0]*$factorResize+"px;top: "+balloonC[1]*$factorResize+"px;" )
 		$("#balloon span").html(adaptTex2Balloon(balloon_text));		
-		
+		MathJax.typeset()
 		arrowY=arrowY*$factorResize;
 		$("#leftArrow").attr("data-top", arrowY ).attr("style", "right: -17px;top: "+arrowY+"px;" ) 
 		$("#rightArrow").attr("data-top", arrowY ).attr("style", "left: -17px;top: "+arrowY+"px;" ) 

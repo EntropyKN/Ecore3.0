@@ -8,6 +8,8 @@ $IDM=$DIRA[2];
 
 
 if (!$IDM || !is_numeric($IDM))  die("this match is not over yet");
+$HEAD_ADD.='<script id="MathJax-script" async src="/js/plugins/mathJax-es5/tex-chtml.js"></script><script src="/js/plugins/mjxgui.js?'.PAGE_RANDOM.'"></script>';
+
 
 include_once($_SERVER['DOCUMENT_ROOT']."/config/php.function.games.php");
 $D=finalCalc2($DIRA[2],false);
@@ -26,13 +28,26 @@ if (!$D["game"]["dontShowDebriefScore"]) {
     $D["gdata"]=array();
     foreach($D["s"] as $k => $v) {
         //$O.="$k $v <br />";
-        
+        $question=$questionO=$v["question"];
+        $question=preg_replace('/<eq>[\s\S]+?<\/eq>/', '', $question);
+        $question=strip_tags($question);
+        $question=str_replace("\n", "", $question);
+        $question=str_replace("\r", "", $question);
+        if (!$question){
+            if ($questionO!="") {
+                $question="Ecco l'equazione";// da internazionalizzare
+            }else{
+                // no audio
+            }
+        } 
+ 
+ 
         $D["sss"][]=$v;
         if ($k<sizeof($D["s"])-1)
         $D["gdata"][]=array(
             "name"=>floatval( ($k+1)),
             "steps"=>$v["scorePercent"],
-            "Q"=>text_cut($v["question"], 72),
+            "Q"=>text_cut($question, 72),
             //"pictureSettings"=>array("src"=>"/data/scenarios/".$v["scenario_id"]."_640.jpg")
             "winningPercStart"=>$D["game"]["winningPercStart"]
         );
@@ -286,11 +301,11 @@ $O.='</div>';//coreIn
 $O.='</div>';//core
 $O.='<div class="clear"></div>';
 
-if ($_COOKIE["debug"]
+if (1 //$_COOKIE["debug"]
 ){
 	$O.="<pre>";
     //$O.=print_r($_SESSION, true);
-	$O.=print_r($D, true);
+	$O.=print_r($D["s"], true);
 	$O.="</pre>";
 }
 

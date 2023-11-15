@@ -59,8 +59,8 @@ function sql_num_rows($q){
 
 
 function db_string($string) {
-	$string=stripslashes($string);
-	$string=stripslashes($string);
+	//$string=stripslashes($string);$string=stripslashes($string);
+    $string=str_replace("\\", "\\\\",$string); // \=\\ math
 	$string=str_replace("'","''",$string);
 	$string=db_safe_value($string);
 	return $string;
