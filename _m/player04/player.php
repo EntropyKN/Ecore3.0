@@ -4,6 +4,7 @@ $PRELOAD=true;
 $MP4RND="";
 //$MP4RND="?".rand(1, 18000);
 $MP4RND="?nochachepliz";
+$HEAD_ADD.='<script id="MathJax-script" async src="/js/plugins/mathJax-es5/tex-chtml.js"></script><script src="/js/plugins/mjxgui.js?'.PAGE_RANDOM.'"></script>';
 
 //if ($PRELOAD) $JSA[]=''.C_DIR.'/_m/player01/preload.js?'.PAGE_RANDOM;
 

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);ini_set("display_errors",1);
 // https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226
-// https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226&force=1&log=1&NOAUDIOGENERATION
+// https://ecore.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=2&force=1&log=1&NOAUDIOGENERATION
 /*
 https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226&NOAUDIOGENERATION=1
 https://ecore.sgameup.com/_m/ajax.generatePlayerAudio.php?log=1&gameId=2
@@ -166,6 +166,19 @@ foreach($D["s"] as $S => $V){
         if ($z==5 ||$z==6 ) $text2audio=$V["answer_3"];
         if ($z==7 ||$z==8 ) $text2audio=$V["answer_4"];
         
+        
+        $text2audioO=$text2audio;
+        $text2audio=preg_replace('/<eq>[\s\S]+?<\/eq>/', '', $text2audio);
+        $text2audio=strip_tags($text2audio);
+        $text2audio=str_replace("\n", "", $text2audio);
+        $text2audio=str_replace("\r", "", $text2audio);
+        if (!$text2audio){
+            if ($text2audioO!="") {
+                $text2audio="Ecco l'equazione";// da internazionalizzare
+            }else{
+                // no audio
+            }
+        }       
         //////////////////////////////
         
         if (!$_GET["NOAUDIOGENERATION"]) {
@@ -203,12 +216,13 @@ foreach($D["s"] as $S => $V){
 //unset ($D[s]);
 //echo json_encode($D);
 
-if ($D["log"]) 
+if ($D["log"]) {
+    header('Content-Type: application/json; charset=utf-8'); 
     echo json_encode($D);
 
-else
+}else{
     if (!$IDM || !is_numeric($IDM)) echo  json_encode(array("response"=>true, "total generated"=>$totalGenerated)    );
     else return $generatePlayerAudio=array("response"=>true, "total generated"=>$totalGenerated) ;
-
+}
 
 ?>
