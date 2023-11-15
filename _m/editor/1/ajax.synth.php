@@ -1,34 +1,6 @@
 <?php
 /* 
 
-avatarId
-: 
-"3"
-feedback
-: 
-"1"
-gameId
-: 
-"226"
-lang
-: 
-"it"
-scene
-: 
-"C"
-step
-: 
-"3"
-text
-: 
-"dopo la risposta 1x"
-voice
-: 
-"f"
-voiceSex
-: 
-"m"
-
 https://to.sgameup.com/_m/editor/1/ajax.synth.php?text=dopo+la+risposta+1x&gameId=226
 &step=3&scene=C
 &voice=f
@@ -63,13 +35,20 @@ if (!$G["avatarId"] || !is_numeric($G["avatarId"])){
 	echo json_encode($G);
 	return;
 }
+$G["textO"]=$G["text"];
+$G["text"]=preg_replace('/<eq>[\s\S]+?<\/eq>/', '', $G["text"]);
 $G["text"]=strip_tags($G["text"]);
-
+$G["text"]=str_replace("\n", "", $G["text"]);
+$G["text"]=str_replace("\r", "", $G["text"]);
 if (!$G["text"]){
-	$G[]["response"]=false;
-	$G["reason"]="Missing Text";
-	echo json_encode($G);
-	return;
+    if ($G["textO"]!="") {
+        $G["text"]="Osserva questa equazione";// da internazionalizzare
+    }else{
+        $G[]["response"]=false;
+        $G["reason"]="Missing Text";
+        echo json_encode($G);
+        return;
+    }
 }
 
 $G["response"]=true;

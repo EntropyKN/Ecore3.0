@@ -2,7 +2,7 @@
 
 $JSA[]=''.C_DIR.'/_m/editor/editorCommon.js?'.PAGE_RANDOM;
 
-
+$HEAD_ADD.='<script id="MathJax-script" async src="/js/plugins/mathJax-es5/tex-chtml.js"></script><script src="/js/plugins/mjxgui.js?'.PAGE_RANDOM.'"></script>';
 
 $CSSA[]=''.C_DIR.'/_m/editor/editCommon.css?'.PAGE_RANDOM;
 $CSSA[]=''.C_DIR.'/_m/editor/0/editor_0.css?'.PAGE_RANDOM;
@@ -285,7 +285,7 @@ de la mano velazqueziana
 en su lienzo "las meninas".
 */		
 		
-			$O.='<div id="avatar_sentence_title" class="subtitle"><span>'.L_avatar_sentence.'</span>:<div id="digit" class="advice">'.L_digit.'</div></div>';
+			$O.='<div id="avatar_sentence_title" class="subtitle"><span>'.L_avatar_sentence.'</span>:<div id="digit" class="advice">'.L_digit.'</div><div id="fx_avatar_sentence" class="fx"></div></div>';
 			$O.='<textarea maxlength="800" rows="4" id="avatar_sentence" class="get textarea" cols="50" style="height: 55px;"></textarea>';
 			$O.='<div id="audioManage">';$O.='</div>';	
 			//if ($D["audio"]){
@@ -351,8 +351,13 @@ $O.='<div id="noFinalBlock">';
 			$O.='<div id="ascore_v_'.$answ .'">';
 		}
 		// textarea_answTight
-		//$addClass=""; 
-		$O.='<textarea maxlength="255" rows="2" id="answer_'.$answ.'" class="textarea_answ textarea" cols="50" style="height: 33px;"></textarea>';
+        $O.='<div class="prevEditGroup">';
+            $O.='<div id="fx_answ_'.$answ.'" class="fx"></div>';
+            $O.='<textarea maxlength="255" rows="2" id="answer_'.$answ.'" class="textarea_answ textarea textarea_answTight" cols="50" style="height: 33px;"></textarea>';
+            $O.='<div title="click to edit" id="answer_prev_'.$answ.'" class="answer_prev">... '.$answ.'</div>';
+        $O.='</div>';
+
+
 		$O.='<select class="select ascore" id="ascore_'.$answ.'">';
 			$O.='<option value="na">?</option>';
 			for ($v = 0; $v<= 10; $v++) {	$O.='<option value="'.$v.'">'.$v.'</option>';	}

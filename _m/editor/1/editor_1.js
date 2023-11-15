@@ -190,8 +190,9 @@ $(function() {
 
 		for (var i = 1; i <= 4; i++) {
 			$("#answer_"+i).val(d["answer_"+i]+"")
-            
+            $("#answer_prev_"+i).html ( adaptTex2Balloon( d["answer_"+i]+"") )
 			if (d["ascore_"+i] == null)  d["ascore_"+i]="na"
+            if (d["ascore_"+i] == "null")  d["ascore_"+i]="na"
 			$("#ascore_"+i).val(d["ascore_"+i]);
 			
 			if (i==4) {
@@ -240,10 +241,10 @@ $(function() {
 		
 
 		if (parseInt(d["step"])<D["steps"]) {
-			$(".textarea_answ").addClass("textarea_answTight")
+			//$(".textarea_answ").addClass("textarea_answTight")
 			$(".goto,.subtitleR1").show();				
 		}else{
-			$(".textarea_answ").removeClass("textarea_answTight")
+			//$(".textarea_answ").removeClass("textarea_answTight")
 			$(".goto,.subtitleR1").hide();			
 		}
 		
@@ -317,6 +318,7 @@ $(function() {
 		
 		}
 		
+        MathJax.typeset()	 // update equation	
 		urlChange(d["step"], d["scene"])
 
 	}
@@ -505,6 +507,7 @@ $(function() {
 				//$("#debug").html(php_answer)
 				$("#saving").hide()
 				var whatA=what.split("_");
+				MathJax.typeset()
 				if (whatA[0]=="ascore"	|| whatA[0]=="answer") scoreCalc();
 				return true
 			}
@@ -737,7 +740,7 @@ $(function() {
 	var adaptTex2Balloon=function (t)	{
 		t=t.trim()
 		t=t.replace(/\n/g,"<br />");//nl2br
-		
+		MathJax.typeset()
 		return t
 	}
 
@@ -811,20 +814,35 @@ $(function() {
         
 	})
 	
-    
+    $(".answer_prev").on("click", function(e) {
+        id=this.id.replace("answer_prev_", "answer_")
+        $(this).hide();
+        $("#"+id).show().focus();
+    })    
     
 	$(".textarea_answ").on("keyup", function(e) {
-			if ($(this).val().length>=255) alert ("There's a limit of 255 digits for this area");
-		
+			if ($(this).val().length>=255) {
+                alert ("There's a limit of 255 digits for this area");
+                return;
+		    }
 			id=this.id; v=$(this).val();
+            idPrev=this.id.replace( "answer_", "answer_prev_")
+            
 			clearTimeout(writeDB);
 			writeDB = setTimeout(function(){
-               
+               $("#"+idPrev).html(     adaptTex2Balloon(v)         )
                 //alert (id+" "+v)      (what, val, table, whereId, step, scene)
 				save (id, v, null, null, $("#core").attr("data-step"), $("#core").attr("data-scene"))
 			
 			}, 500);
-	})	
+	})
+    .on("blur", function(e) {
+        id=this.id.replace( "answer_", "answer_prev_")
+        $(this).hide();
+        $("#"+id).show()
+        //idFx=this.id.replace( "answer_", "fx_answ_")$("#"+idFx).hide()
+        
+    })
 	$(".addFeedback").on("click", function(e) {e.preventDefault()
         var thisId=this.id.replace("addFeedback_","")
 
@@ -1479,7 +1497,32 @@ $(function() {
             $("#pickAvatarList").hide();
 		  //console.log(tclass+" nascondo")
         }
-	})		
+	})
+
+    const mjxgui = new MJXGUI('#mjxgui-button', '$$', function() {
+        //let tr = document.createElement('tr');
+        let data='\n'+"<eq>$$ "+mjxgui.getLatex()+" $$</eq>"+'\n';
+        targetA=$("#mjxgui_editor_window").attr("data-target").split ("_")
+        
+        //fx_answ_X
+        if (targetA[0]=="fx" && targetA[1]=="answ") {
+            $("#answer_"+targetA[2]).val( $("#answer_"+targetA[2]).val()+data)
+            $("#answer_prev_"+targetA[2]).html($("#answer_prev_"+targetA[2]).html()+data)       
+            MathJax.typeset()
+            $("#answer_"+targetA[2]).keyup()
+        }
+        if (  $("#mjxgui_editor_window").attr("data-target")=="fx_avatar_sentence"  )  {
+          $("#avatar_sentence").val( $("#avatar_sentence").val()+data).keyup()
+            
+        }
+        
+
+    })
+        
+    $(".fx").on("click", function() {
+        $("#mjxgui_editor_window").show()
+        $("#mjxgui_editor_window").attr("data-visible", "true").attr("data-target", this.id)
+    })  	
 	//############### run
 
 	$(window).load(function(){

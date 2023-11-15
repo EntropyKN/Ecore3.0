@@ -346,6 +346,7 @@ $(function() {
 			$("#playmask").fadeOut(200);
 		}
 		$("#core #send_no").attr("id", "send")
+        MathJax.typeset()
 		
 	}
 
@@ -413,7 +414,7 @@ $(function() {
 				//////////////////////////////////////////////////////////
 				if (data["cmd"]=="getExchanges") {
 					$("#logC").html(R[1])
-					
+					MathJax.typeset()
 				}
 				
 				

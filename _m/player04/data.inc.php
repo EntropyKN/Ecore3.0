@@ -15,6 +15,12 @@ function is_wordwall($url) {
     if (intval($id)) return intval($id);
 	return false;	
 }
+function replaceSomeTags($s) {
+    $s=str_replace("<eq>", "",  $s);
+    $s=str_replace("</eq>", "",  $s);
+    return $s;
+}
+
 ######## DATA EXCHANGE
 
 $G=sql_fetch_assoc(	sql_query("
@@ -107,7 +113,14 @@ $FACTOR=2;
 $G["AB"]=array();
 $stepC=0;
 while (	$ST=sql_fetch_assoc($qS)	){
-	
+
+    $ST["avatar_sentence"]=replaceSomeTags($ST["avatar_sentence"]);
+    $ST["answer_1"]=replaceSomeTags($ST["answer_1"]);
+    $ST["answer_2"]=replaceSomeTags($ST["answer_2"]);
+    $ST["answer_3"]=replaceSomeTags($ST["answer_3"]);
+    $ST["answer_4"]=replaceSomeTags($ST["answer_4"]);
+
+
 	$ST["answerN"]=2;if ($ST["answer_3"]) $ST["answerN"]=3;if ($ST["answer_4"]) $ST["answerN"]=4;;if ($ST["answer_5"]) $ST["answerN"]=5;
     if (!$ST["avatar_pos"]) $ST["avatar_pos"]="264,3";
     
