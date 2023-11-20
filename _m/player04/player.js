@@ -525,8 +525,8 @@ $(function() {
 		if ($sayNowO>answern) 	$sayNowO=1;
 		if ($sayNowO<=0) 			$sayNowO=answern;
 		
-		//Slert ($sayNowO+"#say_"+$sayNowO);
-		$("#say").text(	$("#say_"+$sayNowO).text()			).attr("data-sayord",$sayNowO)
+		$("#say").html(	$("#say_"+$sayNowO).html()			).attr("data-sayord",$sayNowO)
+        
 		
 	})
 

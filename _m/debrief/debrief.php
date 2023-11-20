@@ -301,8 +301,7 @@ $O.='</div>';//coreIn
 $O.='</div>';//core
 $O.='<div class="clear"></div>';
 
-if (1 //$_COOKIE["debug"]
-){
+if ($_COOKIE["debug"]){
 	$O.="<pre>";
     //$O.=print_r($_SESSION, true);
 	$O.=print_r($D["s"], true);
