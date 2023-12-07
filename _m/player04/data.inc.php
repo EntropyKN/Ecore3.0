@@ -4,16 +4,34 @@ if (!$DIRA[2] || !is_numeric($DIRA[2])) {header("location:/?/".$DIRA[2]."__NOT_F
 
 require_once($_SERVER['DOCUMENT_ROOT']."/config/php.function.youtube.inc.php");
 function is_wordwall($url) {  
-    //https://wordwall.net/resource/39252
+    /* 
+    ex: https://wordwall.net/resource/39252
+    https://wordwall.net/fr/resource/1684474
+    
+    [0] => https:
+    [1] => 
+    [2] => wordwall.net
+    [3] => fr
+    [4] => resource
+    [5] => 1684474
 
+    [0] => https:
+    [1] => 
+    [2] => wordwall.net
+    [3] => resource
+    [4] => 1684474
+
+    */
     $url=strtolower($url);
     $url=str_replace("//www.","://", $url);
     $url=str_replace("http://","https://", $url);
-    $start=substr($url, 0,30);
-    if ($start!="https://wordwall.net/resource/") return false;
-    $id=str_replace($start,"", $url);
-    if (intval($id)) return intval($id);
-	return false;	
+    $c=explode("/",$url);
+   // return $c;
+    if ($c[0]!="https:" || $c[2]!="wordwall.net" ) return false;
+    
+    if ($c[3]="resource" && intval($c[4]) ) return true;
+    if ($c[4]="resource" && intval($c[5]) ) return true;
+	return true;
 }
 function replaceSomeTags($s) {
     $s=str_replace("<eq>", "",  $s);
