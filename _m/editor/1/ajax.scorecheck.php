@@ -26,7 +26,9 @@ $gameId=$D["gameId"];
 
 
 function gameIntervalCalc2($gameId){
-	$str="SELECT step, scene,
+	$str="SELECT answersType, step, scene,
+    img_1, img_2, img_3, img_4, 
+    altImg_1, altImg_2, altImg_3, altImg_4, 
 	answer_1, answer_2, answer_3, answer_4, 
 	ascore_1,ascore_2,ascore_3, ascore_4, goto1, goto2, goto3, goto4 FROM games_steps WHERE gameId =$gameId and type IS NULL order by step ASC";
 	$Q=sql_query($str);
@@ -54,6 +56,8 @@ function gameIntervalCalc2($gameId){
 	$Z=0;
 	while (	$S=sql_assoc($Q)	){
 		$S=array_map("trim", $S);
+        ////////////////////
+        //$D["response"]=0;$D["reason"]=$S["answersType"];return $D;
 		$S["questNumb"]=3;if ($S["goto4"]) $S["questNumb"]=4;
         if ($S["answer_1"] =="0") $S["answer_1"]="zero";
         if ($S["answer_2"] =="0") $S["answer_2"]="zero";
@@ -61,29 +65,53 @@ function gameIntervalCalc2($gameId){
         if ($S["answer_4"] =="0") $S["answer_4"]="zero";
 
 		// TESTO DOMANDE
-		if ($S["questNumb"]==3) {
-			if (	!$S["answer_1"] || !$S["answer_2"] || !$S["answer_3"]  ){
-				$D["response"]=0;
-				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_missing_one_or_more_answers; //L_the_first_three_answers_are_mandatory
-				return $D;
-			}
-			if (!$S["answer_3"]	 && $S["answer_4"]			){	// c'e' la quattro ma non la tre
-				$D["response"]=0;
-				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_you_cannot_use_question_4_without_using_question_3; // cannot use question 4 without use question 3
-				return $D;	
-			}
-		}else{
-		// 4 possibili risposte
-			if (	!$S["answer_1"] || !$S["answer_2"] || !$S["answer_3"] || !$S["answer_3"]  ){
-				$D["response"]=0;
-				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_missing_one_or_more_answers; //
-				return $D;
-			}
-
-			
-		} //if ($S["questNumb"]==3) {
+        if ($S["answersType"]=="txt") { 
+            if ($S["questNumb"]==3) {
+                if (	!$S["answer_1"] || !$S["answer_2"] || !$S["answer_3"]  ){
+                    $D["response"]=0;
+                    $D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_missing_one_or_more_answers; //L_the_first_three_answers_are_mandatory
+                    return $D;
+                }
+                if (!$S["answer_3"]	 && $S["answer_4"]			){	// c'e' la quattro ma non la tre
+                    $D["response"]=0;
+                    $D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_you_cannot_use_question_4_without_using_question_3; // cannot use question 4 without use question 3
+                    return $D;	
+                }
+            }else{
+            // 4 possibili risposte
+                if (	!$S["answer_1"] || !$S["answer_2"] || !$S["answer_3"] || !$S["answer_3"]  ){
+                    $D["response"]=0;
+                    $D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_missing_one_or_more_answers; //
+                    return $D;
+                }	
+            } //if ($S["questNumb"]==3) {
+        }
+       // $D["response"]=0;$D["reason"]=$S["answersType"];return $D;
 		// FINE TESTO DOMANDE
-		
+		if ($S["answersType"]=="img") { 
+            if ($S["questNumb"]==3) {
+                if (	!$S["img_1"] || !$S["img_2"] || !$S["img_3"]  ){
+                    $D["response"]=0;
+                    $D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_missing_one_or_more_image_answers." - A ".$S["questNumb"]; //L_the_first_three_answers_are_mandatory
+                    return $D;
+                }
+                if (!$S["img_3"]	 && $S["img_4"]			){	// c'e' la quattro ma non la tre
+                    $D["response"]=0;
+                    $D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_you_cannot_use_question_4_without_using_question_3; // cannot use question 4 without use question 3
+                    return $D;	
+                }
+            }else{
+            // 4 possibili risposte
+                if (	!$S["img_1"] || !$S["img_2"] || !$S["img_3"] || !$S["img_4"]  ){
+                    $D["response"]=0;
+                    $D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_missing_one_or_more_image_answers." - B ".$S["questNumb"];  //
+                    return $D;
+                }	
+            } //if ($S["questNumb"]==3) {
+        
+        }
+        
+        
 		
 		// PUNTEGGI almeno uno zero
 		$S["scoresA"]=array();

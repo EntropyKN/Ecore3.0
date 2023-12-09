@@ -13,6 +13,7 @@ $HEAD_ADD.='<script id="MathJax-script" async src="/js/plugins/mathJax-es5/tex-c
 
 include_once($_SERVER['DOCUMENT_ROOT']."/config/php.function.games.php");
 $D=finalCalc2($DIRA[2],false);
+//$O.="<pre>";$O.=print_r($D["s"], true);echo $O;die();
 $D["idm"]=$DIRA[2];
 if (!$D["match"]["end"])  die("this match is not over yet");
 $HEAD_ADD.='<script type="text/javascript">';
@@ -300,11 +301,11 @@ if ($D["game"]["status"]=="playable" || $D["gameId"]==226) {
 $O.='</div>';//coreIn
 $O.='</div>';//core
 $O.='<div class="clear"></div>';
-
+$O.="<pre>";$O.=print_r($D["s"], true);
 if ($_COOKIE["debug"]){
-	$O.="<pre>";
+	$O.="<pre>";$O.=print_r($D["s"], true);
     //$O.=print_r($_SESSION, true);
-	$O.=print_r($D["s"], true);
+	
 	$O.="</pre>";
 }
 

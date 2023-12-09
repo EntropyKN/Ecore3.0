@@ -74,33 +74,12 @@ $(function() {
         }
         
 	})
-    /*.hover(function(){
-		var avatar_id_send=this.id.replace("avtr_","");
-		var currentClass=$("#avatarSprite").attr("class");
-		var currentAvatarId=$("#avatarSprite").attr("data-currentAvatar");
-		$("#avatarSprite").attr("class", 		currentClass.replace("avatar_"+currentAvatarId, "avatar_"+avatar_id_send)			)
-		$("#avatarSprite").attr("data-currentAvatar", avatar_id_send);	
-        var avtrName
-		if (avatar_id_send=="1000"){
-			$("#avatarSprite,#rightArrow,#leftArrow,#avatarDims").hide()
-			$("#avatar_sentence_title span").text(L_sentence)
-            avtrName=$(".avtrNameNOAVTR").text()
-		}else{
-			$("#avatarSprite,#leftArrow,#avatarDims").show()
-			$("#avatar_sentence_title span").text(L_avatar_sentence)
-            avtrName=$("#avtrName_"+avatar_id_send).text()  
-		}
-        
-        $("#pickAvatar span").text(avtrName);
 
-    }, function(){ //out
-        alert ("out")
-    });
-    
-    */
     
     /////
 	var loadStep=function (d)	{
+    
+       
         $("#core").attr("data-step",d["step"] ).attr("data-scene",d["scene"] )
 		for (var i = 1; i <= 4; i++) { // answers reset
             $("#answer_"+i).text("")
@@ -235,6 +214,19 @@ $(function() {
             }
             
             $("#answerFeedbackSavedAudio_"+i).attr("data-avatar", avatar_id)
+            
+            // risposte per immagine 
+            changeAnswersMode (d["answersType"], false)
+            $("#altImg_"+i).val(d["altImg_"+i])
+            $("#prevEditGroupImg_"+i+" a").remove();
+            $("#prevEditGroupImg_"+i+" .loadImage, #prevEditGroupImg_"+i+" .changeImage").remove();
+
+            if (d["img_"+i]) {  
+                $("#prevEditGroupImg_"+i).prepend('<a target="_blank" title="Open image in a new window" href="'+d["img_"+i]+'?'+Math.random()+'"><img src="'+d["img_"+i]+'" /></a><div id="changeImage_'+i+'" class="changeImage">'+L_change_image+'</div>').removeClass("prevEditGroupFirst");
+            }else{
+                $("#prevEditGroupImg_"+i).prepend('<div id="loadImage_'+i+'" class="loadImage">+'+L_upload_an_image+'</div>')
+            }
+            
             
 	//	alert (d["goto"+i]);
 		} // for
@@ -448,7 +440,9 @@ $(function() {
 				   $(this).dialog('close');
 				}
 			  }]
-			}).dialog("open");											   
+			}).dialog("open");	
+            
+            
 		}else{
 			sceneHandler(idgo)
 		}
@@ -508,7 +502,7 @@ $(function() {
 				$("#saving").hide()
 				var whatA=what.split("_");
 				MathJax.typeset()
-				if (whatA[0]=="ascore"	|| whatA[0]=="answer") scoreCalc();
+				if (whatA[0]=="ascore"	|| whatA[0]=="answer" || whatA[0]=="answersType") scoreCalc();
 				return true
 			}
 		})	
@@ -865,7 +859,8 @@ $(function() {
 		console.log(action, where)
 		$.ajax({
 			type: "POST", url: "/_m/editor/1/ajax.sceneHandler.php"
-			,data: {gameId:D["gameId"], divid:action+"_"+where } 
+			,data: {gameId:D["gameId"], 
+            divid:action+"_"+where } 
 			,cache: false,dataType: 'html',
 			success: function(JD){				
 				JD=JSON.parse(JD);
@@ -878,6 +873,7 @@ $(function() {
 				$("#upContainerL").html(JD["htm"])
 				//stepM_3_C
 				$ ("#stepM_"+where).click();
+                scoreCalc();
 			}
 		})	//$.ajax
 		
@@ -1182,9 +1178,7 @@ $(function() {
 		form_data.append('gameId', D["gameId"])
 		form_data.append('step', step=$( "#stepRef" ).text())
 		form_data.append('scene', step=$( "#sceneRef" ).text())
-		
-		
-		               
+              
 	    $.ajax({
                 url: "/_m/editor/1/ajax.attach.php",
                 dataType: 'text',  
@@ -1393,19 +1387,7 @@ $(function() {
 		$("#cmtarea_fc_"+id).focus();
 		//console.log ("da .cmt "+id)
 		return;
-/*	
-		//restoreMissing()
-		idedit=$("#core").attr("data-cmtedit")
-		id=this.id.replace("cmt_", "")
-		ida=id.split("_")
-//		if (ida[0]!="fc") {
-			if (id==idedit) return
-			if (idedit!="null") {
-				cmtsave(idedit, id)
-			}else{
-				cmtopen(id)
-			}
-	*/
+
 	})	
 	$(".boxQuarterL,.boxQuarterW").on("click",function(e) {
 		$(".cmtareac").hide()
@@ -1522,7 +1504,88 @@ $(function() {
     $(".fx").on("click", function() {
         $("#mjxgui_editor_window").show()
         $("#mjxgui_editor_window").attr("data-visible", "true").attr("data-target", this.id)
-    })  	
+    })
+    
+    // L_textual or L_by_images
+    $("#answersC div").on("click", function() {
+        if ($(this).attr("class")=="active") return;
+        idi=this.id.replace("answers_", "") // txt or img
+        changeAnswersMode(idi, true)
+ 
+})
+
+    
+    var changeAnswersMode=function (idi, write)	{
+		if (!idi) return;
+        $("#answersC div").removeClass("active");
+        $("#answers_"+idi).addClass("active");
+        if (idi=="img") {
+            $(".prevEditGroup").hide();
+            $(".prevEditGroupImg").show()
+        }else{
+            // txt
+            $(".prevEditGroup").show();
+            $(".prevEditGroupImg").hide()        
+        } 
+        if (write) {
+            save ("answersType", idi)
+            //scoreCalc(); // moved in save()
+        }
+		//console.log(idi)
+    }
+    
+    $(document).on("click",'.loadImage, .changeImage', function(e) {
+        var ref=this.id.replace("loadImage_", "").replace("changeImage_", "");
+        $("#uploadInput").val("").attr("data-answer",ref ).click()
+
+    })   
+
+
+	$("#uploadInput").on("change", function() {
+		$("#mask,#spinLoad").show()
+
+		var file_data = $(this).prop('files')[0];
+		var form_data = new FormData();                  
+		form_data.append('file', file_data)
+		form_data.append('gameId', D["gameId"])
+		form_data.append('step', $( "#stepRef" ).text())
+		form_data.append('scene',$( "#sceneRef" ).text())
+        form_data.append('answer',  $("#uploadInput").attr("data-answer")      )
+	    $.ajax({
+                url: "/_m/editor/1/ajax.imageHandle.php",
+                dataType: 'text',  
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(resp){
+					r=resp.split("|-|")
+                    console.log(resp)
+					$("#mask,#spinLoad").hide()
+					if (r[0]=="true") {
+                        $("#prevEditGroupImg_"+r["1"]+" img, #loadImage_"+r["1"]+"").remove();
+                        $("#prevEditGroupImg_"+r["1"]).prepend('<a target="_blank" title="Open image in a new window" href="'+r[2]+'?'+Math.random()+'"><img src="'+r[2]+'" /></a><div id="changeImage_'+r[1]+'" class="changeImage">'+L_change_image+'</div>').removeClass("prevEditGroupFirst");
+					   scoreCalc();
+					}else{
+						alert (""+r[1])
+					}
+                    
+                }	
+    	});
+	});
+
+	$(".altImg").on("keyup", function(e) {
+        var idc=this.id.replace("altImg_","")
+        var val=$(this).val()
+		if (val.length>255) alert ("There's a limit of 800 digits for this area");
+        
+        clearTimeout(writeDB);
+        writeDB = setTimeout(function(){ 
+            console.log("altImg_"+idc, val)
+            save ("altImg_"+idc, val)
+        }, 1000);		
+	})
 	//############### run
 
 	$(window).load(function(){

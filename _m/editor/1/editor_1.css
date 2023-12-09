@@ -2221,6 +2221,7 @@ border:1px solid #555!important ;
     position: relative;
     width: 335px;
     float: left;
+    display: none; /* debug */
 }
 .fx {
     background: transparent url("/img/fx16.png") no-repeat scroll 8px 3px / 13px 13px;
@@ -2252,5 +2253,101 @@ border:1px solid #555!important ;
 #fx_avatar_sentence {
     display: block;
     top: 12px;
+}
+#answersC {
+    margin: -5px 0 12px 1px;
+    position: relative;
+    width: 502px;
+    float: left;
+}
+#answersC div {
+    float: left;
+    margin: 0px 10px 0 0;
+    padding: 2px 5px;
+    border-radius: 7px;
+    font-size: 13px;
+    cursor: pointer;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+#answersC .active{
+    cursor: default;
+    background: #386916;
+    color: white;
+}
+
+.prevEditGroupImg {
+    width: 315px;
+    min-height: 177px;
+    border: 1px solid #AAA;
+    padding: 10px;
+    position: relative;
+    float: left;
+    border-style: dashed;
+    text-align: center;
+    margin: 0 0 72px 0;
+}
+
+.loadImage {
+    font-size: 24px;
+    color: #ccc;
+    /* position: absolute; */
+    /* top: 15px; */
+    padding: 64px 0 84px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    /* background: red; */
+    /* height: 203px; */
+}
+.changeImage {
+    margin: 3px 25px 9px 0;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    bottom: -3px;
+    left: 6px;
+    background: #386916;
+    text-align: center;
+    width: 322px;
+    padding: 6px 0;
+    display: none;
+    opacity: 0.85;
+}
+.prevEditGroupImg:hover .changeImage{display: block}
+.prevEditGroupFirst:hover .changeImage{display: none}
+
+.altImg:focus .changeImage{display: none}
+
+.prevEditGroupImg img {
+    /*position: absolute;
+    top: 10px;
+    left: 10px;*/
+    max-width: 300px;
+    max-height: 177px;
+}
+
+.altImg {
+    position: absolute;
+    bottom: -60px;
+    left: -3px;
+
+}
+
+
+.altTxt {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    font-size: 13px;
+    color: #666;
+}
+#uploadInput {
+    position: fixed;
+    top: -100px;right: 0px
 }
 

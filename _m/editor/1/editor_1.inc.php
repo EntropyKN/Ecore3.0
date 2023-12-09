@@ -101,9 +101,8 @@ if (    empty ($D["s"][$D["startStep"]] [$D["startScene"]] )    ) {
 $DtoJS["startStep"]=$D["startStep"]; $DtoJS["startScene"]=$D["startScene"];
 //////////
 
-
 $HEAD_ADD.='<script type="text/javascript">var D='.json_encode($DtoJS).';var F1='.json_encode($F1).';var F1t='.json_encode($F1t).';</script>';
-$HEAD_ADD.='<script type="text/javascript">var L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_STEP="'.L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_STEP.'";var L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_SCENE="'.L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_SCENE.'";var L_yes="'.L_yes.'";var L_cancel="'.L_cancel.'"; var L_sentence="'.L_sentence.'";L_avatar_sentence="'.L_avatar_sentence.'"; var L_loosing_end="'.L_loosing_end.'";var L_winning_end="'.L_winning_end.'"; var L_COMPULSORY_ATTACHMENTS_YES="'.L_COMPULSORY_ATTACHMENTS_YES.'";var L_COMPULSORY_ATTACHMENTS_NO="'.L_COMPULSORY_ATTACHMENTS_NO.'";</script>';
+$HEAD_ADD.='<script type="text/javascript">var L_upload_an_image="'.L_upload_an_image.'"; var L_change_image="'.L_change_image.'";var L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_STEP="'.L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_STEP.'";var L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_SCENE="'.L_DO_YOU_REALLY_WANT_TO_DELETE_THIS_SCENE.'";var L_yes="'.L_yes.'";var L_cancel="'.L_cancel.'"; var L_sentence="'.L_sentence.'";L_avatar_sentence="'.L_avatar_sentence.'"; var L_loosing_end="'.L_loosing_end.'";var L_winning_end="'.L_winning_end.'"; var L_COMPULSORY_ATTACHMENTS_YES="'.L_COMPULSORY_ATTACHMENTS_YES.'";var L_COMPULSORY_ATTACHMENTS_NO="'.L_COMPULSORY_ATTACHMENTS_NO.'";</script>';
 
 ############### DATA ENDS
 
@@ -126,6 +125,7 @@ $O.='</div>';
 */
 $O.='<div id="spinLoad"></div>';
 $O.='<div id="mask" class="opacity50"></div>';
+
 
 
 
@@ -189,32 +189,7 @@ from
 	
 	switch ($f) {
 		case "scenario_id":
-			// select scenario
-			/*$O.='<select size="1" name="'. $f.''.PAGE_RANDOM.'" class="select230" id="'.$f.'">';
-				$O.='<option value="0">'.L_select_scenario.' 0</option>'; 			
-				$scenarioQ=sql_query	("SELECT S.id, S.name FROM scenarios S WHERE S.invisble=0 AND (S.propertyUid=0 OR S.propertyUid=".$_SESSION["uid"].") order by name ASC");
-				//echo sql_error();
-				$AFC=0;
-				while (	$scenario=sql_assoc($scenarioQ)	){
-					//$sourceS="/data/avatar_prev/".$scenario["id"].".mp4";
-					$O.='<option id="'.$scenario["id"].'" value="'.$scenario["id"].'"'.$selected.'>'.$scenario["name"].'</option>';
-					$AFC++;
-				}
-			 $O.='</select>';
-			 $O.='<a id="scenarioHandlerLink" href="/?/scenarios/jBAm3KDRWdSVTNnTYFKr4g==">';
-                $O.='<img src="/img/ico/plus12.png" alt="" />'; //
-             $O.='</a>';
-			// select avatar
-			$O.='<select size="1" name="avatar_id'.PAGE_RANDOM.'" class="select230" id="avatar_id">';
-				$O.='<option value="0" selected="selected">'.L_select_avatar.'</option>'; 			
-				$QAF=sql_query	("SELECT id, name FROM avatars where 1 AND  id!=4 order by FIELD(id, 1000) ASC  , name ASC");
-				while (	$avatar=sql_assoc($QAF)	){
-					if ($avatar["name"]=="L_no_avatar") $avatar["name"]=L_no_avatar;
-					$O.='<option id="'.$avatar["id"].'" value="'.$avatar["id"].'"'.$selected.'>'.$avatar["name"].'</option>';
-				}
-			 $O.='</select>';			 
-			 */
-            /////
+
             $O.='<div id="selectDataZone">';
                 $O.='<div data-defVal="'.L_select_avatar.'" class="pickD" id="pickAvatar"><span class="pickAvatarT">'.L_select_avatar.'</span></div>';
                 //<img id="dartDownAv" class="dartDown" src="/img/ico/blu_d16.png" alt="" />
@@ -290,7 +265,7 @@ en su lienzo "las meninas".
 			$O.='<div id="audioManage">';$O.='</div>';	
 			//if ($D["audio"]){
 			$O.='<div class="audioline">';
-				$O.='';
+				
 			
 				$O.='<div id="loadingAudio" class="loading"></div>';
 				$O.='<img id="imgAudio" src="/img/ico/audio16off.png?asd" alt=""  />';		
@@ -343,9 +318,11 @@ en su lienzo "las meninas".
  }
 
 $O.='<div id="noFinalBlock">';
-
+    
 	$O.='<div id="players_answers_title" class="subtitle">'.L_players_answers.':<div class="subtitleR1">'.L_goto.':</div><div class="subtitleR">'.L_score.':</div></div>';
-	// "answer_1", "ascore_1",
+	$O.='<div id="answersC"><div id="answers_txt">'.L_textual.'</div><div id="answers_img" class="active">'.L_by_images.'</div></div>';
+    $O.='<input id="uploadInput" type="file" accept="image/png, image/jpeg" class="uploadInputC" name="uploadInput'.PAGE_RANDOM.'" >';
+    // "answer_1", "ascore_1",
 	for ($answ = 1; $answ<= 4; $answ++) {
 		if ($answ > 2) {
 			$O.='<div id="ascore_v_'.$answ .'">';
@@ -356,7 +333,15 @@ $O.='<div id="noFinalBlock">';
             $O.='<textarea maxlength="255" rows="2" id="answer_'.$answ.'" class="textarea_answ textarea textarea_answTight" cols="50" style="height: 33px;"></textarea>';
             $O.='<div title="click to edit" id="answer_prev_'.$answ.'" class="answer_prev">... '.$answ.'</div>';
         $O.='</div>';
-
+        
+        
+        // prevEditGroupImg
+        $O.='<div id="prevEditGroupImg_'.$answ.'" class="prevEditGroupImg prevEditGroupFirst" >';
+            $O.='<div id="loadImage_'.$answ.'" class="loadImage">+'.L_upload_an_image.'</div>';
+            $O.='<div class="altTxt">'.L_alternative_text.':</div>';
+            $O.='<input class="altImg" id="altImg_'.$answ.'" value="" name="altImg'.PAGE_RANDOM.'" type="text">';
+            $O.='<div id="changeImage_'.$answ.'" class="changeImage">'.L_change_image.'</div>';
+        $O.='</div>';
 
 		$O.='<select class="select ascore" id="ascore_'.$answ.'">';
 			$O.='<option value="na">?</option>';
@@ -382,6 +367,9 @@ $O.='<div id="noFinalBlock">';
             $O.='<textarea maxlength="255" rows="2" id="answerFeedback_'.$answ.'" class="textarea_fb textarea" cols="50" style="height: 33px;"></textarea>';
             $O.='<textarea maxlength="255" rows="2" id="answerFeedbackSavedAudio_'.$answ.'" data-avatar="0" class="textarea_fbAudio textarea" cols="50" style="height: 33px;"></textarea>';
         $O.='</div>';
+        /////
+        
+        
         /////////////////
         
 		//$O.='<div class="clear"></div>';

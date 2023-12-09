@@ -717,3 +717,8 @@ top: 41px;
     color: #AAA;
     margin: 45px 0 0 12px;
 }
+
+#balloon span img {
+    max-width: 383px;
+    max-height: 405px;
+}

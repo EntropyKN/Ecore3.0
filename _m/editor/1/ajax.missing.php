@@ -21,8 +21,24 @@ $fieldMissNoType=array(
 
 	"answer_1"=>L_answer." 1",
 	"answer_2"=>L_answer." 2",
+    "answer_3"=>L_answer." 3",
 	"ascore_1"=>L_score." 1",
 	"ascore_2"=>L_score." 2",
+    "ascore_3"=>L_score." 3",
+);
+
+$fieldMissNoTypeIMG=array(
+	"scenario_id"=>L_scenario,
+	"avatar_id"=>L_avatar,
+	"avatar_sentence"=>L_avatar_sentence." F",
+	"avatar_audio"=>L_avatar_sentence_audio,
+
+	"img_1"=>L_image_answer." 1",
+	"img_2"=>L_image_answer." 2",
+    "img_3"=>L_image_answer." 3",
+	"ascore_1"=>L_score." 1",
+	"ascore_2"=>L_score." 2",
+    "ascore_3"=>L_score." 3",
 );
 
 $fieldMissYesType=array(
@@ -64,8 +80,9 @@ while (	$S=sql_assoc($SQ)	){
 	$D["s"][		$S["step"]		]=$S;
 	
 
-		
+
 	$fieldMiss=$fieldMissNoType;
+    if ($S["answersType"]=="img") $fieldMiss=$fieldMissNoTypeIMG;
     if ($S["type"]) $fieldMiss=$fieldMissYesType;
 	
 

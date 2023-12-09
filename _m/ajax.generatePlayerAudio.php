@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);ini_set("display_errors",1);
 // https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226
-// https://ecore.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=2&force=1&log=1&NOAUDIOGENERATION
+// https://ecore.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=4&force=1&log=1&NOAUDIOGENERATION=1
 /*
 https://to.sgameup.com/_m/ajax.generatePlayerAudio.php?gameId=226&NOAUDIOGENERATION=1
 https://ecore.sgameup.com/_m/ajax.generatePlayerAudio.php?log=1&gameId=2
@@ -9,9 +9,12 @@ https://ecore.dev.di.unito.it//_m/ajax.generatePlayerAudio.php?log=1&gameId=16
  */
 //if (!$IDM || !is_numeric($IDM)) header('Content-Type: application/json; charset=utf-8');
 
-$_GET["force"]=1; // GENERA SEMPRE!
+$_GET["force"]=1; // se 1 o true GENERA SEMPRE audio, anche quando è stato già generato in passato
 
 include_once($_SERVER['DOCUMENT_ROOT']."/config/config.inc.php");
+$lang_trigger="edt";
+require_once(C_ROOT."/config/lang.inc.php");
+
 if (!$_SESSION["uid"]) {
 	$D["response"]=false;
 	$D["reason"]="mm sounds like you're not logged at the moment";
@@ -43,15 +46,30 @@ $gidPre=$D["gameId"]."_answ";
 //G.status,
 $D["Q"]="SELECT idStep, concat (step, scene) SS, step, scene, answer_1,answer_2,answer_3 ,answer_4,  G.language,S.avatar_id, 
 A.voiceId_it,
-A.voiceId_en   
+A.voiceId_en,
+answersType,
+img_1,
+img_2,
+img_3,
+img_4,
+altImg_1,
+altImg_2,
+altImg_3,
+altImg_4, 
+goto4
+
 
 FROM 
 games_steps S
 RIGHT JOIN games G ON G.gameId=S.gameId
 RIGHT JOIN avatars  A ON A.id=S.avatar_id
 WHERE 
-
-(answer_1 is not null OR  answer_2 is not null OR answer_3 is not null OR answer_4 is not null )
+(
+    (   answersType='txt' AND
+        (answer_1 is not null OR answer_2 is not null OR answer_3 is not null OR answer_4 is not null )
+    )
+    OR answersType='img'
+)
 AND 
 audioAnwers IS NULL AND 
 S.gameId= ".db_string($D["gameId"])." order BY step ASC, scene ASC
@@ -59,7 +77,6 @@ S.gameId= ".db_string($D["gameId"])." order BY step ASC, scene ASC
 
 if ($_GET["force"]) $D["Q"]=str_replace("audioAnwers IS NULL AND ", "", $D["Q"]);
 $D["avatar_voices_used"]=array();
-
 
 //$D["Qe"]=sql_error();
 $SQ=sql_query($D["Q"]);
@@ -78,12 +95,17 @@ while (	$S=sql_assoc($SQ)	){
         $gidPre."_".$S["SS"]."_3M", $gidPre."_".$S["SS"]."_3F",
         $gidPre."_".$S["SS"]."_4M", $gidPre."_".$S["SS"]."_4F",
     );
-    if (is_null($S["answer_4"])) {
-        unset($S["answer_4"]);
-        unset ($S["audioAnwers"][6], $S["audioAnwers"][7] );
-    
+
+    // 3 or 4 answers?
+    if (   
+        (is_null($S["answer_4"]) && is_null($S["img_4"])    )
+        || is_null($S["goto4"])   
+        ) {
+        unset($S["answer_4"], $S["img_4"], $S["altImg_4"]);
+        unset ($S["audioAnwers"][6], $S["audioAnwers"][7] );    
     }
-        
+    
+    ///////////////////////////
 	$D["s"][	$S["SS"]	]=$S;
     unset ($D["s"][	$S["SS"]	] ["SS"]);
 }
@@ -161,11 +183,20 @@ foreach($D["s"] as $S => $V){
     
         $z++; $text2audio=false;
         $file=$c.".mp3";
-        if ($z==1 ||$z==2 ) $text2audio=$V["answer_1"];
-        if ($z==3 ||$z==4 ) $text2audio=$V["answer_2"];
-        if ($z==5 ||$z==6 ) $text2audio=$V["answer_3"];
-        if ($z==7 ||$z==8 ) $text2audio=$V["answer_4"];
         
+        if ($V["answersType"]=="txt"){
+            if ($z==1 ||$z==2 ) $text2audio=$V["answer_1"];
+            if ($z==3 ||$z==4 ) $text2audio=$V["answer_2"];
+            if ($z==5 ||$z==6 ) $text2audio=$V["answer_3"];
+            if ($z==7 ||$z==8 ) $text2audio=$V["answer_4"];
+        }else{ // img
+            if ($z==1 ||$z==2 ) $text2audio=$V["altImg_1"];
+            if ($z==3 ||$z==4 ) $text2audio=$V["altImg_2"];
+            if ($z==5 ||$z==6 ) $text2audio=$V["altImg_3"];
+            if ($z==7 ||$z==8 ) $text2audio=$V["altImg_4"];
+        
+        
+        }
         
         $text2audioO=$text2audio;
         $text2audio=preg_replace('/<eq>[\s\S]+?<\/eq>/', '', $text2audio);
@@ -173,11 +204,12 @@ foreach($D["s"] as $S => $V){
         $text2audio=str_replace("\n", "", $text2audio);
         $text2audio=str_replace("\r", "", $text2audio);
         if (!$text2audio){
-            if ($text2audioO!="") {
-                $text2audio="Ecco l'equazione";// da internazionalizzare
-            }else{
-                // no audio
-            }
+  //          if ($text2audioO!="") {
+            if ($V["answersType"]=="txt")  
+                $text2audio=L_AUDIO_ANSWER_FOR_EQUATION;
+            else 
+                $text2audio=L_AUDIO_ANSWER_FOR_IMAGE;
+  
         }       
         //////////////////////////////
         
@@ -187,7 +219,6 @@ foreach($D["s"] as $S => $V){
             if (!$audioFile){
                 $R["errorAudioFile"][]=$text2audio.",".$D["voices"][$voiceID]["langCode"].",".$D["voices"][$voiceID]["voiceName"];
                 //$G["response"]=false;$G["reason"]="there has been a problem generating the audio file";echo json_encode($G);return;
-
             }else{
                 file_put_contents($_SERVER['DOCUMENT_ROOT']. '/data/audio/'.$file, $audioFile       );        
             }

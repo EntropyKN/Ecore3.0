@@ -74,7 +74,7 @@ $(function() {
     
     var playTrig=function(sn=null, statusBack=null) {
         // status=null, answer, feedback
-        
+        //if (sn===0 && statusBack==='answer' ) return; DEBUG utility
         if (sn===null && statusBack===null ) {
             
             $("#playmask").fadeIn()
@@ -111,7 +111,7 @@ $(function() {
     
     
 	var loadSeq=function(s, status=null, info=null) {
-
+        
         if (status===null) $( "#playmask" ).fadeIn()
         
         
@@ -127,7 +127,7 @@ $(function() {
         var balloon_text= S[s]["question"];
 
         if (status=="answer")   {
-        
+            
             audioFile=S[s]["answerAudio"]+"?"+Math.random();
 
             if (    $("#player").attr("data-sexsession")  =="F" ) {
@@ -138,6 +138,8 @@ $(function() {
             avatar_id=1000;
             arrowY="10";
             balloon_text=S[s]["answer"];
+            if (S[s]["answersType"]=="img") balloon_text='<img src="'+S[s]["answerIMG"  ]+'" />'
+            
             arrowPos="left";
             $("#balloon").addClass("answerBalloon")
         }else{

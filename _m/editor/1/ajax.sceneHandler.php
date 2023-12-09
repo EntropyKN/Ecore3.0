@@ -58,7 +58,7 @@ if ($D["action"]=="addAnswer" ||$D["action"]=="removeAnswer" ) { // SEMPRE SOLO 
 	}	
 	$D["response"]=true;
 	
-	$D["Q"]="/*".$D["action"]." */ UPDATE `games_steps` SET `goto4` = NULL, answer_4=NULL, ascore_4= NULL WHERE gameId=".$D["gameId"]." AND scene='".$D["scene"]."' AND step='".$D["step"]."' ";	
+	$D["Q"]="/*".$D["action"]." */ UPDATE `games_steps` SET `goto4` = NULL, answer_4=NULL, ascore_4= NULL, img_4=NULL, altImg_4=NULL WHERE gameId=".$D["gameId"]." AND scene='".$D["scene"]."' AND step='".$D["step"]."' ";	
 	if ($D["action"]=="addAnswer") $D["Q"]="/*".$D["action"]." */ UPDATE `games_steps` SET `goto4` = 'A' WHERE gameId=".$D["gameId"]." AND scene='".$D["scene"]."' AND step='".$D["step"]."' ";
 	if ($writeDB) sql_query($D["Q"]);if (sql_error())  $D["sql_error"]=sql_error();
 	$D["htm"]=getStructureHTM($D["gameId"]);

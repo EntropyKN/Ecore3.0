@@ -303,6 +303,9 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
         avatar_size ,avatar_pos ,balloon_pos, feedback_1, feedback_2,feedback_3 , feedback_1_audio,feedback_2_audio,feedback_3_audio
         , audioAnwers 
         , audioAnwersUpdate
+        ,answersType,img_1,img_2,img_3,img_4
+        
+        
 	 FROM games_steps WHERE gameId=".$d["gameId"]." ORDER BY step ASC, scene ASC ";
 	$qS=sql_query($d["q1"]);
 	if (sql_error()) 	return sql_error();
@@ -399,7 +402,9 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
         $ST["avatar_audio"]=$d["G"][$sceneStep	]["avatar_audio"];	
         
         
-		$ST["answer"]=$d["G"][$sceneStep	]["answer_".$ST["answerN"]];
+		$ST["answer"]=$d["G"][$sceneStep]["answer_".$ST["answerN"]];
+        $ST["answerIMG"]=$d["G"][$sceneStep]["img_".$ST["answerN"]];
+        $ST["answersType"]=$d["G"][$sceneStep]["answersType"];
 //avatar_size ,avatar_pos ,balloon_pos, feedback_1, feedback_2,feedback_3 , feedback_1_audio,feedback_2_audio,feedback_3_audio, audioAnwers 
 
         $ST["answerAudio"]=$d["gameId"]."_answ_".$ST["step"].$ST["scene"]."_".$ST["answerN"]."M.mp3?".$d["G"][$sceneStep]["audioAnwersUpdate"]; //replace female in JS //226_answ_2A_1M
@@ -419,6 +424,9 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
      
 		$ST["type"]=NULL;
         if (     isset($d[$sceneStep]["avatar_id"])  &&     $d[$sceneStep]["avatar_id"]!=1000) $d["avatarsIds"][]=$d["G"][$sceneStep	]["avatar_id"];
+        
+        
+        
 		$Stt++;
         
         // utilizzato anche per match movie
@@ -609,7 +617,9 @@ function finalCalc2NoCustomOTTAVI($idMatch, $update=false){ //, $playerSex="m"
 		step, scene, scenario_id, avatar_id, avatar_sentence, answer_1,answer_2, answer_3, answer_4, avatar_audio
 		, ascore_1,ascore_2, ascore_3, ascore_4,
         arrowPos, arrowY,
-        avatar_size ,avatar_pos ,balloon_pos, feedback_1, feedback_2,feedback_3 , feedback_1_audio,feedback_2_audio,feedback_3_audio, audioAnwers 
+        avatar_size ,avatar_pos ,balloon_pos, feedback_1, feedback_2,feedback_3 , feedback_1_audio,feedback_2_audio,feedback_3_audio, 
+        audioAnwers,answersType,img_1,img_2,img_3,img_4
+
 	 FROM games_steps WHERE gameId=".$d["gameId"]." ORDER BY step ASC, scene ASC ";
 	$qS=sql_query($d["q1"]);
 	if (sql_error()) 	return sql_error();
@@ -907,6 +917,7 @@ function finalCalc($idMatch, $update=false){
 	$d["q1"]="SELECT 
 		step, scene, scenario_id, avatar_id, avatar_sentence, answer_1,answer_2, answer_3, answer_4
 		, ascore_1,ascore_2, ascore_3, ascore_4
+        ,answersType,img_1,img_2,img_3,img_4
 	 FROM games_steps WHERE gameId=".$d["gameId"]." ORDER BY step ASC, scene ASC ";
 	$qS=sql_query($d["q1"]);
 	if (sql_error()) 	return sql_error();
@@ -1072,6 +1083,7 @@ function matchExchanges($idMatch){
 	$d["q1"]="SELECT step, scene, 
 		avatar_sentence, answer_1,answer_2, answer_3, answer_4	
         , feedback_1,feedback_2, feedback_3, feedback_4
+,answersType,img_1,img_2,img_3,img_4        
 	 FROM games_steps WHERE gameId=".$d["gameId"]." ORDER BY step ASC ";
 	$qS=sql_query($d["q1"]);
 	if (sql_error()) 	return sql_error();

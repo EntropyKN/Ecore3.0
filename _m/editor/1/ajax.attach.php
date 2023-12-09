@@ -272,7 +272,7 @@ if ($D["cmd"]=="delete"	){
         die("false|-|File too large. File must be less than 24 megabytes. FileType: ".$_FILES['file']['type']);
     }
 	if(!in_array($_FILES['file']['type'], $acceptable_mime))  {
-        die("false|-|".L_sorry.", ".L_this_type_of_file_is_not_acceptable.": ".$_FILES['file']['type']." debugInfo:".print_r($_FILES, true)); //die("false|-|Invalid file type. ".$_FILES['file']['type']." type not acceptable");
+        die("false|-|".L_sorry.", ".L_this_type_of_file_is_not_acceptable.": ".$_FILES['file']['type']); //die("false|-|Invalid file type. ".$_FILES['file']['type']." type not acceptable");
     }
 	
 	$D["ext"]=substr($_FILES["file"]['name'], strrpos($_FILES["file"]['name'], '.')+1);
