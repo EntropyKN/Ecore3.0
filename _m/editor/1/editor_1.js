@@ -536,7 +536,7 @@ $(function() {
 			,cache: false,dataType: 'html',
 			success: function(php_answer){
 				//$("#debug").html(php_answer)
-               // console.log(php_answer)
+                console.log(php_answer)
 
 				r=php_answer.split("|-|")
 				if (r[0]=="false") {

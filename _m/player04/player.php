@@ -132,27 +132,10 @@ $O.="</div>";//player
 $O.=$AUDIOHTML;
 
 $O.='<div class="clear"></div>';
-
+$O.='<input type="text" value="0" id="currentscene" >';
 
 //$O.="<pre>".print_r($G,true)."</pre>";
-/*
-$ex=explode(' ',$_SERVER['HTTP_USER_AGENT']);
-$O.= 'OS: '.$ex[4].' '.$ex[5].' '.$ex[6].'/n'; 
-$O.= 'Browser: '.$ex[0]; */
-	//$O.="<pre>".print_r($_SERVER['HTTP_USER_AGENT'],true)."</pre>";
 
-
-
-
-/*$O.="<pre>";
-$O.="****".deviceType();
-$O.="****".playerVersion();
-$O.="</pre>";*/
-$O.='<input type="text" value="0" id="currentscene" >';
-//if ($_COOKIE["debug"]		){
-if ($_COOKIE["debug"]		){
-//$O.="<pre>".print_r($FILESNOR,true)."</pre>";
-	//$O.="<pre>".print_r($FILES,true)."</pre>";
 $O.="
 <br />
 <br />
@@ -161,27 +144,9 @@ $O.="
 <br />
 
 <br /><br /><br />
-"; //<a id=\"fcalc\" href=\"#\">testF</a>
-
-//$O.="<br /><pre>".print_r($_SESSION,true)."</pre>";
-$O.="<br /><pre>".print_r($G,true)."</pre>";
-//$O.="------------------A------------------";
-//$O.="<br /><pre>".print_r($G["ss"]["A"][7],true)."</pre>";
-//$O.="------------------B------------------";
-//$O.="<br /><pre>".print_r($G["ss"]["B"][7],true)."</pre>";
-//$O.="------------------------------------";
-
-$O.="<br /><pre>";
-//$O.="A size:".sizeof ($G["ss"]["A"]);
+"; 
 
 
-
-
-$O.="</pre>";
-$O.="<br /><pre>".print_r($G["ss"]["A"],true)."</pre>";
-}
-/*$O.="<pre>".$RNDoffice.print_r($_SESSION, true)."</pre>";
-*/
 $O.="</div>";//core
 
 ?>

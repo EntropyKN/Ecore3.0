@@ -109,7 +109,16 @@ feedback_4, feedback_4_audio,
 IF(feedback_1_scenario_id IS NOT NULL , concat ('".SCENARIOPATH."', S.feedback_1_scenario_id,'_1024.jpg'), null) as feedback_1_scenario,
 IF(feedback_2_scenario_id IS NOT NULL , concat ('".SCENARIOPATH."', S.feedback_2_scenario_id,'_1024.jpg'), null) as feedback_2_scenario,
 IF(feedback_3_scenario_id IS NOT NULL , concat ('".SCENARIOPATH."', S.feedback_3_scenario_id,'_1024.jpg'), null) as feedback_3_scenario,
-IF(feedback_4_scenario_id IS NOT NULL , concat ('".SCENARIOPATH."', S.feedback_4_scenario_id,'_1024.jpg'), null) as feedback_4_scenario
+IF(feedback_4_scenario_id IS NOT NULL , concat ('".SCENARIOPATH."', S.feedback_4_scenario_id,'_1024.jpg'), null) as feedback_4_scenario,
+answersType,
+img_1,
+img_2,
+img_3,
+img_4,
+altImg_1,
+altImg_2,
+altImg_3,
+altImg_4
 
 FROM games_steps S 
 /*LEFT JOIN avatars A on A.id=S.avatar_id */
@@ -137,9 +146,16 @@ while (	$ST=sql_fetch_assoc($qS)	){
     $ST["answer_2"]=replaceSomeTags($ST["answer_2"]);
     $ST["answer_3"]=replaceSomeTags($ST["answer_3"]);
     $ST["answer_4"]=replaceSomeTags($ST["answer_4"]);
+    $ST["altImg_1"]=str_replace(['"',"'"], "", $ST["altImg_1"]);
+    $ST["altImg_2"]=str_replace(['"',"'"], "", $ST["altImg_2"]);
+    $ST["altImg_3"]=str_replace(['"',"'"], "", $ST["altImg_3"]);
+    $ST["altImg_4"]=str_replace(['"',"'"], "", $ST["altImg_4"]);
+    
 
-
-	$ST["answerN"]=2;if ($ST["answer_3"]) $ST["answerN"]=3;if ($ST["answer_4"]) $ST["answerN"]=4;;if ($ST["answer_5"]) $ST["answerN"]=5;
+	//$ST["answerN"]=2;if ($ST["answer_3"]) 
+    
+    $ST["answerN"]=3;if (   ($ST["answer_4"] || $ST["img_4"]) && $ST["goto4"]   ) $ST["answerN"]=4;
+    
     if (!$ST["avatar_pos"]) $ST["avatar_pos"]="264,3";
     
 	$ST["avatar_posA"]=explode(",",$ST["avatar_pos"] ); $ST["avatar_posA"][0]=$ST["avatar_posA"][0]*$FACTOR;$ST["avatar_posA"][1]=$ST["avatar_posA"][1]*$FACTOR;
@@ -315,7 +331,7 @@ $G["ss"]["A"][	sizeof ($G["ss"]["A"])-2				]["avatar_sentence"]=turnLinksOn(		$G
 //////////////////////////
 
 $HEAD_ADD.='<script type="text/javascript">';
-$HEAD_ADD.='var G='.json_encode($G).';';
+$HEAD_ADD.='var L_click_to_enlarge="'.L_click_to_enlarge.'";var G='.json_encode($G).';';
 $HEAD_ADD.='</script>';
 
 

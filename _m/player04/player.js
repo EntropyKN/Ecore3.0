@@ -1,5 +1,6 @@
 $(function() {
-    ///update 2023-05-23
+    ///update 2023-12-07
+
 	var $pconsol=$("#playerConsoleCont");
 	var debug=$("#debug")
 
@@ -114,8 +115,6 @@ $(function() {
         }
 	})	
 	
-	
-	
 	$("#attachViewerClose").on('click',function(e){
             e.preventDefault()			
             $("#attachViewer").fadeOut();
@@ -123,12 +122,14 @@ $(function() {
 			var sceneGet=$("#currentscene").val();
 			var st=$pconsol.attr("data-step")
             var $showConsole=1;
-            if (S[sceneGet][st]["compulsoryAttachments"]=="1"	) {	
+
+            if ( S[sceneGet][st]["compulsoryAttachments"]=="1"	) {	
                 var iX
 				for (iX = 1; iX <= S[sceneGet][st]["A"].length; iX++) {
 					if ($("#att_"+iX).attr("data-read")=="0") $showConsole=0;
 				}     
 			}
+            
             if ($showConsole!=0) $("#playerConsoleCont,#playerConsole").show() 
            
 	})	
@@ -258,8 +259,8 @@ $(function() {
 		if (!isFinal) isFinal=false; else isFinal=true;		
 		if (isFinal) scene="A";	
 		$("#currentscene").val(scene)
-		//alert (scene+" "+s)
 		
+	//	
 		
 
 		var S=G["ss"][scene];
@@ -308,21 +309,39 @@ $(function() {
 		}
 		*/
 		$("#aansw").attr("src", S[s]["avatar_audio"]+"?"+Math.random()			)	// audio
+        
+        
 		if (!isFinal) {
 			$("#playerConsoleCont").attr("data-answern",S[s]["answerN"])
 			$(".choiceOpt").hide()
+            console.log (S[s]["answersType"])
             var i
 			for (i = 1; i <= S[s]["answerN"]; i++) {
 	
-				$("#say_"+i ).text(S[s]["answer_"+i  ]			).attr("data-scene", S[s]["goto"+i  ]) //i+" "+
-				$("#opt_"+i ).show();			
+                /////////////                
+                if (S[s]["answersType"]=="img") 
+                    $("#say_"+i ).html('<img src="'+S[s]["img_"+i  ]+'" alt="'+S[s]["altImg_"+i  ]+'" title="'+L_click_to_enlarge+'" />'	).addClass("sayImg")
+                else
+                    $("#say_"+i ).text(S[s]["answer_"+i  ]).removeClass("sayImg")
+                                
+                $("#say_"+i ).attr("data-scene", S[s]["goto"+i  ]) //i+" "+
+				$("#opt_"+i ).show();
+                
+                
+                
 				//Slert ("answer_"+i  +" "+S[s]["answer_"+i  ])
 				//$("#sayimg_"+i).attr("src", "/data/imgavtr/faceEmotions/"+usr_avatar_id+"/"+D[$STATE][i]['USR']['emo']+".jpg")
 			}
+            
+            
 			var RRR=Math.floor(Math.random() * S[s]["answerN"]);RRR=RRR+1
 			$("#say").attr("data-sayord",RRR)
-			$("#say").text(S[s]["answer_"+RRR  ])
 			$("#say").attr("data-scene", S[s]["goto"+RRR  ])
+            
+            if (S[s]["answersType"]=="img")
+                $("#say" ).html('<img src="'+S[s]["img_"+RRR  ]+'" alt="'+S[s]["altImg_"+RRR  ]+'" />'	).addClass("sayImgMain")
+            else            
+                $("#say").text(S[s]["answer_"+RRR  ]).removeClass("sayImgMain")
 
 		}
 		$( "#mask" ).fadeOut('fast')
@@ -349,6 +368,15 @@ $(function() {
         MathJax.typeset()
 		
 	}
+    $(document).on('click','.sayImg img',function(e){ 
+        $("#attachViewerIN").html('<img src="'+$(this).attr("src")+'" style="max-width: 1000px;max-height:562.50px;" />' )
+        //width="'+$(this).attr("data-W1")+'"  height="'+$(this).attr("data-H1")+'" 
+        $("#attachViewer").fadeIn();
+        $("#playerConsoleCont").hide();
+
+
+    })
+
 
 	// stepLoad=>play=>animazione=>
 	//CURRENTSCENE="A";
@@ -588,7 +616,7 @@ $(function() {
 		//$(".pop").show()
 		//## choice		
 
-		$choiceH=$pconsol.offset().top+70-20
+		$choiceH=$pconsol.offset().top+70;//-20
 		$("#choiceCont").css("max-height", $choiceH+ "px")
 		$("#choiceC").css("max-height", ($choiceH-$("#choiceH").height())+ "px")
 		
