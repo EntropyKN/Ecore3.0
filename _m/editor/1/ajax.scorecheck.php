@@ -128,17 +128,17 @@ function gameIntervalCalc2($gameId){
 		
 		// PUNTEGGI non settati
 		if ($S["questNumb"]==3) {
-			if (	$S["ascore_1"]==NULL || $S["ascore_2"]==NULL || $S["ascore_3"]==NULL ) {
+			if (	$S["ascore_1"]===NULL || $S["ascore_2"]===NULL || $S["ascore_3"]===NULL ) {
 				$D["response"]=0;
-				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_the_score_of_one_or_more_answers_is_missing; //
+				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_the_score_of_one_or_more_answers_is_missing;//." (1)".$S["ascore_3"]; //
 				return $D;				
 				
 			}
 				
 		}else{
-			if (	$S["ascore_1"]==NULL || $S["ascore_2"]==NULL || $S["ascore_3"]==NULL|| $S["ascore_4"]==NULL ) {
+			if (	$S["ascore_1"]===NULL || $S["ascore_2"]===NULL || $S["ascore_3"]===NULL|| $S["ascore_4"]===NULL ) {
 				$D["response"]=0;
-				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_the_score_of_one_or_more_answers_is_missing.""; //
+				$D["reason"]=L_step." ".$S["step"]."".$S["scene"].": ".L_the_score_of_one_or_more_answers_is_missing;//.""." (2)"; //
 				return $D;				
 				
 			}			

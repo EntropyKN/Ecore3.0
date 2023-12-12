@@ -1356,7 +1356,7 @@ $(function() {
 			,cache: false,dataType: 'html',
 			success: function(php_answer){
 				resp=php_answer.split("|-|")
-				$("#debug").html(php_answer)
+				console.log(php_answer)
 				if (resp[0]=="false"){
 					$("#missingList").html(resp[1]).show()
 					$("#missingmsg").hide()

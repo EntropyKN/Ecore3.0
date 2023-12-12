@@ -48,23 +48,7 @@ $fieldMissYesType=array(
 	"avatar_audio"=>L_final_sentence_audio,
 );
 
-/*$fieldMissComments=array(
-	"L1_comment"=>L_scenario,
-	"L2_comment"=>L_avatar,
-	"L3_comment"=>L_final_sentence,
-	"L4_comment"=>L_final_sentence_audio,
-	
-	"W1_comment"=>L_scenario,
-	"W2_comment"=>L_avatar,
-	"W3_comment"=>L_final_sentence,
-	"W4_comment"=>L_final_sentence_audio,
-);
-*/
 
-/*
-$strG="SELECT * FROM games WHERE gameId =".$gameId."";
-$D["g"]=sql_fetch_assoc(sql_query($strG));
- */
 
 $SQ=sql_query("SELECT  * FROM games_steps WHERE gameId =".$gameId." ORDER BY step ASC, scene ASC");
 $D["s"]=array();
@@ -89,8 +73,8 @@ while (	$S=sql_assoc($SQ)	){
 	
 	foreach($fieldMiss as $field => $text){
 		$response=true;
-		if  (!$S[$field] && $field!="ascore_1" && $field!="ascore_2") 														$response=false;
-		if (!is_numeric($S[$field]) && ($field=="ascore_1" || $field=="ascore_2")					)	 					$response=false;
+		if  (!$S[$field] && $field!="ascore_1" && $field!="ascore_2" && $field!="ascore_3") 				$response=false;
+		if (!is_numeric($S[$field]) && ($field=="ascore_1" || $field=="ascore_2" || $field=="ascore_3")	)	$response=false;
         $fieldA=explode("_", $field);
         if ($fieldA[0]=="answer" && $S[$field]=="0" ) $response=true;
         
