@@ -301,7 +301,7 @@ if ($D["game"]["status"]=="playable" || $D["gameId"]==226) {
 $O.='</div>';//coreIn
 $O.='</div>';//core
 $O.='<div class="clear"></div>';
-$O.="<pre>";$O.=print_r($D["s"], true);
+//$O.="<pre>";$O.=print_r($D["s"], true);
 if ($_COOKIE["debug"]){
 	$O.="<pre>";$O.=print_r($D["s"], true);
     //$O.=print_r($_SESSION, true);
