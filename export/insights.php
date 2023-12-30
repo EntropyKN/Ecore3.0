@@ -24,24 +24,35 @@ require_once($_SERVER['DOCUMENT_ROOT']."/_m/insights/insights.elaborate.php");
 //$debug=true;
 
 if (!sizeof($D["r"])) die ("Nessun risultato :-(");
+$D["alfaStep"]=array();
+if (!empty($D["r"])) foreach( $D["r"] as $k => $v ) {
+    $D["r"][$k]["step"]=array();
+    $qin="SELECT step, answerN, ascore  FROM `matches_step` WHERE `idm` =".$D["r"][$k]["idm"]." ORDER BY `matches_step`.`step` ASC";
+    //$D["r"][$k]["Q"]=$qin;
+	$stepsQ=sql_query($qin);
+//	if (sql_error()) 	return sql_error();
 
-//if ($debug) {
-//    echo "<pre>";print_r($D);die;
+	while (	$steps=sql_fetch_assoc($stepsQ)	){ 
+        $D["r"][$k]["step"][]=$steps;   
+    }
+}
+
 /*
-
-                    [uid] => 2
-                    [name] => Michela
-                    [surname] => ...
-                    [title] => Sbagliando si impara?
-                    [competence_target] => 
-                    [estimated_duration] => 
-                    [startTime] => 1502187096
-                    [endTime] => 1502187513
-                    [from] => 08/08/17 11:11
-                    [to] => 08/08/17 11:18
-                    [score] => wip
-                    [duration] => 6' 57''
+$ch = "L";
+for($s = 0; $s <= 19; $s++){
+    ++$ch;
+    $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["answerN"];
+    ++$ch;
+    $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["ascore"];
+}
 */
+/*foreach (range('M', 'AZ') as $c){
+    $D["alfaStep"][$c]=$s;
+    $s++;
+}
+*/
+
+//if ($debug)  echo "<pre>";print_r($D);die;
 //////////////////////////////////
 require_once $_SERVER['DOCUMENT_ROOT'].'/_lib/PHPExcel/Classes/PHPExcel.php';
 $objPHPExcel = new PHPExcel();
@@ -61,6 +72,19 @@ $S->setCellValue('I1',"Score");
 $S->setCellValue('J1',"ScorePercentDecimal");
 $S->setCellValue('K1',"matchID");
 $S->setCellValue('L1',"moodleUserId");
+
+$ch1 = "L";
+
+for($s = 0; $s <= 19; $s++){
+    $row=1;
+    ++$ch1;
+    $S->setCellValue($ch1.'1',"S".($s+1)."-answerN");
+    ++$ch1;
+    $S->setCellValue($ch1.'1',"S".($s+1)."-score");
+
+}
+
+
 $w=20;
 foreach (range('A', 'L') as $c){
 	//$S->setCellValue('A'.$c,"Data/Ora"); 
@@ -69,7 +93,7 @@ foreach (range('A', 'L') as $c){
 	$S->getColumnDimension($c)->setAutoSize(false);
 	$S->getColumnDimension($c)->setWidth($w);		
 }
-$S->getColumnDimension("L")->setWidth(100);	
+//$S->getColumnDimension("K")->setWidth(60);	
 
 $esitiArray=array(
 "L1"=>"12,5%"
@@ -81,6 +105,7 @@ $esitiArray=array(
 ,"W3"=>"87,5%"
 ,"W4"=>"100%"
 );
+
 
 
 $row=2;
@@ -104,8 +129,22 @@ if (!empty($D["r"])) foreach( $D["r"] as $k => $v ) {
     $S->setCellValue('J'.$row,$v["scorePercentDecimal"]);
 	$S->setCellValue('K'.$row,SITE_URL_LOCATION."?/debrief/".$v["idm"]);	
     $S->setCellValue('L'.$row,$v["muser_id"]);
+    
+    $ch = "L";
+    for($s = 0; $s <= 19; $s++){
+        ++$ch;
+        $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["answerN"];
+        $S->setCellValue($ch.$row,$D["r"][$k]["step"][$s]["answerN"]);
+        ++$ch;
+        $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["ascore"];
+        $S->setCellValue($ch.$row,$D["r"][$k]["step"][$s]["ascore"]);
+    }
+    
 	$row++;
 }
+
+
+
 
 //////////////////////////////  Data/Ora	Cognome	Nome	Gruppo	Palestra	Obiettivo competenza	Durata	Punteggio Conseguito
 
