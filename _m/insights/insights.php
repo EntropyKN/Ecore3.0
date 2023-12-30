@@ -40,12 +40,12 @@ $O.='<div class="clear"></div>';
 $O.='<div class="chart" id="chart3">Graphs3</div>';
 $O.='<div class="clear"></div>';
 $O.='<div class="chartSub" id="chartSub3">'.L_durations_are_expressed_in_minutes.'</div>';
-
+/*
     $O.='<pre>'.print_r($_SESSION,true).'</pre>';
 		$O.='<pre>
 		//// data
 		'.print_r($D,true).'</pre>';
-        
+  */      
 // debug
 /*if (!$_COOKIE["debug"]) { 
 		$O.='<div class="clear"></div>';

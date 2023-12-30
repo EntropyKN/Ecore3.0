@@ -21,7 +21,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/_m/insights/insights.elaborate.php");
 //echo "ciao";
 //die("fin qui"); 
 
-$debug=false;
+//$debug=true;
 
 if (!sizeof($D["r"])) die ("Nessun risultato :-(");
 
@@ -58,16 +58,18 @@ $S->setCellValue('F1',L_duration);
 $S->setCellValue('G1',L_duration." (secs)");
 $S->setCellValue('H1',"Esito");
 $S->setCellValue('I1',"Score");
-$S->setCellValue('J1',"matchID");
+$S->setCellValue('J1',"ScorePercentDecimal");
+$S->setCellValue('K1',"matchID");
+$S->setCellValue('L1',"moodleUserId");
 $w=20;
-foreach (range('A', 'J') as $c){
+foreach (range('A', 'L') as $c){
 	//$S->setCellValue('A'.$c,"Data/Ora"); 
 	$S->getStyle($c.'1')->getFont()->setBold(true);
 	$S->getStyle($c.'1')->getFont()->setName('Calibri')->setSize(11);
 	$S->getColumnDimension($c)->setAutoSize(false);
 	$S->getColumnDimension($c)->setWidth($w);		
 }
-$S->getColumnDimension("J")->setWidth(100);	
+$S->getColumnDimension("L")->setWidth(100);	
 
 $esitiArray=array(
 "L1"=>"12,5%"
@@ -99,7 +101,9 @@ if (!empty($D["r"])) foreach( $D["r"] as $k => $v ) {
     $S->setCellValue('H'.$row,$esitiArray[     $v["final"]         ]); // esito
     
 	$S->setCellValue('I'.$row,$v["final"]);	// score
-	$S->setCellValue('J'.$row,SITE_URL_LOCATION."?/debrief/".$v["idm"]);	
+    $S->setCellValue('J'.$row,$v["scorePercentDecimal"]);
+	$S->setCellValue('K'.$row,SITE_URL_LOCATION."?/debrief/".$v["idm"]);	
+    $S->setCellValue('L'.$row,$v["muser_id"]);
 	$row++;
 }
 
