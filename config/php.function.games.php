@@ -476,6 +476,7 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
 			if (!$d["spread"]["spread"]) {
 				$d["spreadQ"]="SELECT * FROM games_spread WHERE gameId=".$d["gameId"]." AND (".$d["score"].">spreadL AND ".$d["score"]."<= spreadR ) /* B secondo tentativo*/";
 				$d["spread"]=sql_queryt($d["spreadQ"]);
+                
 			}
 		}
 
@@ -523,17 +524,20 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
  
 	$d["update"]=$update;
 	if ($update) {
-		$d["update"]=1;
-		$us="UPDATE matches SET end =".C_TIME." ,final ='".$d["spread"]["spread"]."' WHERE idm=$idMatch";
+		$d["update"]=1; //$d["scorePercentDecimal"]
+		$us="UPDATE matches SET end =".C_TIME." ,final ='".$d["spread"]["spread"]."' 
+        ,scorePercentDecimal='".$d["scorePercent"]."'
+        ,`maxScorePossible` ='".$d["maxScorePossible"]."'
+        WHERE idm=$idMatch";
 		sql_query($us);
-		//if (sql_error()) 	return sql_error()." $us";
+		if (sql_error()) 	$d["updateE"]=sql_error()." $us";
 	}
 
 ///send grades/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	if ($update && $_SESSION['secret']	&& $_SESSION['lis_result_sourcedid'] && $_SESSION['family'] 	&& $_SESSION['lis_outcome_service_url']	
     ){
-		//$d["sessionTest"]=$_SESSION;
+		$d["sendMoodle"]="ok";
 		require_once($_SERVER['DOCUMENT_ROOT'] ."/_lib/ims-lti-master/php-simple/ims-blti/OAuthBody.php");
 $method="POST";
 $oauth_consumer_secret = $_SESSION['secret'];
@@ -568,13 +572,14 @@ $body = '<?xml version = "1.0" encoding = "UTF-8"?>
         </OPERATION>      
     </imsx_POXBody>   
 </imsx_POXEnvelopeRequest>';
-
+        
     $operation = 'replaceResultRequest';
     $postBody = str_replace(
     array('SOURCEDID', 'GRADE', 'OPERATION','MESSAGE'), 
     array($sourcedid, $d["scorePercentDecimal"], $operation, uniqid()),
     $body);
-			
+    
+    $d["$postBody"]=$postBody;	
 			//simplexml_load_string
 			//$d["moodleSendGradesAnsw"] 
             $moodleSendGradesAnsw= (sendOAuthBodyPOST($method, $endpoint, $oauth_consumer_key, $oauth_consumer_secret, $content_type, $postBody));

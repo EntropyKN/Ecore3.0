@@ -37,20 +37,6 @@ if (!empty($D["r"])) foreach( $D["r"] as $k => $v ) {
     }
 }
 
-/*
-$ch = "L";
-for($s = 0; $s <= 19; $s++){
-    ++$ch;
-    $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["answerN"];
-    ++$ch;
-    $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["ascore"];
-}
-*/
-/*foreach (range('M', 'AZ') as $c){
-    $D["alfaStep"][$c]=$s;
-    $s++;
-}
-*/
 
 //if ($debug)  echo "<pre>";print_r($D);die;
 //////////////////////////////////
@@ -63,17 +49,17 @@ $S->setCellValue('B1',L_lastname);
 $S->setCellValue('C1',L_firstname);
 $S->setCellValue('D1',"Email");
 //$S->setCellValue('D1',L_group);
-$S->setCellValue('E1',L_gym);
+$S->setCellValue('E1',"Game");
 //$S->setCellValue('F1',L_competence_target);
 $S->setCellValue('F1',L_duration);
 $S->setCellValue('G1',L_duration." (secs)");
 $S->setCellValue('H1',"Esito");
 $S->setCellValue('I1',"Score");
-$S->setCellValue('J1',"ScorePercentDecimal");
+$S->setCellValue('J1',"ScorePercent");
 $S->setCellValue('K1',"matchID");
 $S->setCellValue('L1',"moodleUserId");
-
-$ch1 = "L";
+$S->setCellValue('M1',"maxScorePossible");
+$ch1 = "M";
 
 for($s = 0; $s <= 19; $s++){
     $row=1;
@@ -81,19 +67,20 @@ for($s = 0; $s <= 19; $s++){
     $S->setCellValue($ch1.'1',"S".($s+1)."-answerN");
     ++$ch1;
     $S->setCellValue($ch1.'1',"S".($s+1)."-score");
-
+    ++$ch1;
+    $S->setCellValue($ch1.'1',"S".($s+1)."-score%");
 }
 
 
 $w=20;
-foreach (range('A', 'L') as $c){
+foreach (range('A', 'M') as $c){
 	//$S->setCellValue('A'.$c,"Data/Ora"); 
 	$S->getStyle($c.'1')->getFont()->setBold(true);
-	$S->getStyle($c.'1')->getFont()->setName('Calibri')->setSize(11);
+	$S->getStyle($c.'1')->getFont()->setName('Calibri')->setSize(9);
 	$S->getColumnDimension($c)->setAutoSize(false);
 	$S->getColumnDimension($c)->setWidth($w);		
 }
-//$S->getColumnDimension("K")->setWidth(60);	
+$S->getColumnDimension("K")->setWidth(50);	
 
 $esitiArray=array(
 "L1"=>"12,5%"
@@ -129,8 +116,9 @@ if (!empty($D["r"])) foreach( $D["r"] as $k => $v ) {
     $S->setCellValue('J'.$row,$v["scorePercentDecimal"]);
 	$S->setCellValue('K'.$row,SITE_URL_LOCATION."?/debrief/".$v["idm"]);	
     $S->setCellValue('L'.$row,$v["muser_id"]);
+    $S->setCellValue('M'.$row,$v["maxScorePossible"]);
     
-    $ch = "L";
+    $ch = "M";
     for($s = 0; $s <= 19; $s++){
         ++$ch;
         $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["answerN"];
@@ -138,15 +126,17 @@ if (!empty($D["r"])) foreach( $D["r"] as $k => $v ) {
         ++$ch;
         $D["alfaStep"][$ch]=$D["r"][$k]["step"][$s]["ascore"];
         $S->setCellValue($ch.$row,$D["r"][$k]["step"][$s]["ascore"]);
+        ++$ch;
+        if (!$v["maxScorePossible"]) $ascoreRelative="";
+        else $ascoreRelative=round(($D["r"][$k]["step"][$s]["ascore"]/$v["maxScorePossible"]*100),2);
+        $S->setCellValue($ch.$row,
+            $ascoreRelative
+        );
+
     }
     
 	$row++;
 }
-
-
-
-
-//////////////////////////////  Data/Ora	Cognome	Nome	Gruppo	Palestra	Obiettivo competenza	Durata	Punteggio Conseguito
 
 
 

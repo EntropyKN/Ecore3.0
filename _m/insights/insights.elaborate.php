@@ -97,7 +97,7 @@ m.idm, m.uid, u.muser_id,m.final,
 u.user_real_name as first_name, u.user_real_surname as last_name, u.user_email as email, 
 Concat (u.user_real_name, ' ', u.user_real_surname) name,
 m.start startTime, m.end endTime ,
-g.title, g.competence_target, g.estimated_duration, m.gameId, m.scorePercentDecimal
+g.title, g.competence_target, g.estimated_duration, m.gameId, m.scorePercentDecimal, m.maxScorePossible
 FROM matches m 
 LEFT JOIN games g on g.gameId=m.gameId 
 LEFT JOIN users u on u.users_id=m.uid 
