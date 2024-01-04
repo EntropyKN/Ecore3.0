@@ -3,7 +3,7 @@ $langLink=$_SERVER["REQUEST_URI"];
 $langLink=str_replace("/lang:en", "",$langLink );
 $langLink=str_replace("/lang:it", "", $langLink);
 $langLink=str_replace("/lang:ar", "", $langLink);
-//+393927884489
+
 if (strpos($langLink, '?') === false) $langLink="/?/".$langLink;
 $langLink.="/lang:";
 while( strpos($langLink, '//') !== false ) {
@@ -22,11 +22,11 @@ if ($_SESSION["lang"]=="ar") {$selectedAR=" optionS";$radicAR=" &radic; ";}
 if ($pageID!="home") $F.='<a class="option" href="/">'.L_dashboard.'</a>';
 if ($pageID!="home") $F.='<span class="separator"></span>';
 
-if ($_SESSION["ulevel"]>=1 ) 	// 1 => editorr
+if ($_SESSION["ulevel"]>=1 ) {	// 1 => editor
 	$F.='<a class="option" href="?/editor/0/0">'.L_create_a_new_game.'</a>';
     $F.='<a class="option" href="?/scenarios">'.L_scenarios.'</a>';
     $F.='<a class="option" href="?/avatarUpload">'.L_new_avatar.'</a>';
-    
+    }
 if ($_SESSION["ulevel"]>=2 ) 	{// 2 => Administrator
     $F.='<span class="separator"></span>';
 	$F.='<a class="option" href="?/groups">'.L_groups.'</a>';
@@ -40,27 +40,6 @@ if ($_SESSION["ulevel"]>=3 ) {	// 3 => super user
 
 if ($_SESSION["ulevel"]>0) $F.='<span class="separator"></span>';
 
-/*
-if (!empty($_SESSION["insights"]["groups"] )		|| $_SESSION["ulevel"]> 0				 )  {
-	$F.='<a class="option" href="?/insights">'.L_insights.'</a>';	
-}
-*/
-/*
-
-*/
-
-/*$F.='<a class="option" href="/">'.L_vabe.'</a>';
-
-if ($_SESSION["ulevel"]>0 ) {
-	$F.='<span class="separator"></span>';
-	$F.='<a class="option" href="?/editor/0/0">'.L_create_a_new_gym.'</a>';
-	$F.='<a class="option" href="?/groups">'.L_groups.'</a>';
-}
-
-if (!empty($_SESSION["insights"]["groups"] )		|| $_SESSION["ulevel"]> 0				 )  {
-	$F.='<a class="option" href="?/insights">'.L_insights.'</a>';	
-}
-*/
 
 
 	$F.='<a class="option'.$selectedEN.'" href="'.$langLink.'en">'.$languages_names["en"].''.$radicEN.'</a>';
