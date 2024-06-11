@@ -57,15 +57,23 @@ $(function() {
 		var id=this.id
         $("#"+id).attr("data-read", "1").find(".view").fadeIn(500);
 		//window.setTimeout(function() {}, 1000) 
-
-
-		if ($(this).attr("data-open")!="out") { // open IN
+        var data_open=$(this).attr("data-open");
+        var data_info=$(this).attr("data-info");
+         if ($(this).attr("href").startsWith("https://www.fuoridaunito.net/seriousgame/html_pages/")) {
+            data_open="in";
+            data_info="insideHtml";        
+        }
+        
+        
+        console.log ("data_open", data_open,"data_info", data_info)
+		if (data_open!="out") { // open IN
 			e.preventDefault()
 
             var somethingWrong=0;
-            switch ($(this).attr("data-info")) {
+            switch (data_info) {
               case "wordwall":
                var urlww=$(this).attr("href");
+               
                 $.getJSON('https://wordwall.net/api/oembed?url='+encodeURIComponent( $(this).attr("href") ) +'&amp;format=json', function(data) {
                     //alert (data["html"])
                     data["html"]=data["html"].replace('width="500"','width="1000"').replace('height="380"','height="562"')
@@ -76,9 +84,13 @@ $(function() {
                     $("#attachViewerClose").click();
                     window.open(  urlww  , '_blank')
                 })
-              
+                              
+                break;  
                 
-                break;   
+              case "insideHtml":
+                $("#attachViewerIN").html('<iframe id="pdfview" type="application/pdf" frameBorder="0" scrolling="auto" width="1000" height="570" src="'+$(this).attr("href")+'" frameborder="0"/></iframe>');
+                break;
+                
               case "pdf":
                 $("#attachViewerIN").html('<iframe id="pdfview" type="application/pdf" frameBorder="0" scrolling="auto" width="1000" height="570" src="'+$(this).attr("href")+'?autoplay=1" frameborder="0"/></iframe>');
                 break;
@@ -391,7 +403,8 @@ $(function() {
 			,cache: false,dataType: 'html',
 			success: function(php_answer){
 				var R=php_answer.split("|-|")
-				console.log (php_answer)
+				console.log ("TRANS:"+ php_answer)
+                //if (data["cmd"]=="finalCalc") alert(php_answer)
 				$("#debug").html(php_answer)
 				$("#saving").hide()
 					
@@ -404,7 +417,7 @@ $(function() {
 					var stepNext=stepDone+1
                     var $sayFeedback=S[sceneGetF][stepDone][    "feedback_"+data["answer"]  ];
 
-                    if ($sayFeedback) {
+                    if ($sayFeedback) { // and  $sayFeedback!='null'
                         // FEEDBACK
                         //
                         showFeedback (stepDone, data["answer"])
