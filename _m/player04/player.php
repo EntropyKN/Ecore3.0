@@ -133,9 +133,11 @@ $O.=$AUDIOHTML;
 
 $O.='<div class="clear"></div>';
 $O.='<input type="text" value="0" id="currentscene" >';
-
-//$O.="<pre>".print_r($G,true)."</pre>";
-
+/*if ($_SESSION["uid"]==3 || $_SESSION["uid"]==58) {
+    $O.="<pre>".print_r($_SESSION,true)."</pre>";
+    $O.="<pre>".print_r($G,true)."</pre>";
+}
+*/
 $O.="
 <br />
 <br />

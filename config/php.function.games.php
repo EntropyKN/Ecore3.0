@@ -275,6 +275,7 @@ function getGames($page=1,$scope="playable", $how_many=8){
 /////////////////////////////////////////////////////////////
 
 function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
+    $d["moodleGrades"]=array();
 	$d["score"]=0;
 
 	$d["scorePercent"]="0";
@@ -518,7 +519,7 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
             "feedbackAudio"=>'',
 			);
             if ($d["stepFinal"]["avatar_id"]!=1000) $d["avatarsIds"][]=$d["stepFinal"]["avatar_id"];
-
+            $d["stepFinal"]["grade2moodle"]="Non richiesto";
 
  
  
@@ -533,61 +534,31 @@ function finalCalc2($idMatch, $update=false){ //, $playerSex="m"
 		if (sql_error()) 	$d["updateE"]=sql_error()." $us";
 	}
 
-///send grades/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	if ($update && $_SESSION['secret']	&& $_SESSION['lis_result_sourcedid'] && $_SESSION['family'] 	&& $_SESSION['lis_outcome_service_url']	
-    ){
-		$d["sendMoodle"]="ok";
-		require_once($_SERVER['DOCUMENT_ROOT'] ."/_lib/ims-lti-master/php-simple/ims-blti/OAuthBody.php");
-$method="POST";
-$oauth_consumer_secret = $_SESSION['secret'];
-
-$sourcedid = $_SESSION['lis_result_sourcedid'];
-if (get_magic_quotes_gpc()) $sourcedid = stripslashes($sourcedid);
-$oauth_consumer_key = $_SESSION['family'];
-$endpoint = $_SESSION['lis_outcome_service_url'];
-$content_type = "application/xml";
-
-$body = '<?xml version = "1.0" encoding = "UTF-8"?>  
-<imsx_POXEnvelopeRequest xmlns = "http://www.imsglobal.org/lis/oms1p0/pox">      
-    <imsx_POXHeader>         
-        <imsx_POXRequestHeaderInfo>            
-            <imsx_version>V1.0</imsx_version>  
-            <imsx_messageIdentifier>MESSAGE</imsx_messageIdentifier>         
-        </imsx_POXRequestHeaderInfo>      
-    </imsx_POXHeader>      
-    <imsx_POXBody>         
-        <OPERATION>            
-            <resultRecord>
-                <sourcedGUID>
-                    <sourcedId>SOURCEDID</sourcedId>
-                </sourcedGUID>
-                <result>
-                    <resultScore>
-                        <language>en-us</language>
-                        <textString>GRADE</textString>
-                    </resultScore>
-                </result>
-            </resultRecord>       
-        </OPERATION>      
-    </imsx_POXBody>   
-</imsx_POXEnvelopeRequest>';
-        
-    $operation = 'replaceResultRequest';
-    $postBody = str_replace(
-    array('SOURCEDID', 'GRADE', 'OPERATION','MESSAGE'), 
-    array($sourcedid, $d["scorePercentDecimal"], $operation, uniqid()),
-    $body);
-    
-    $d["$postBody"]=$postBody;	
-			//simplexml_load_string
-			//$d["moodleSendGradesAnsw"] 
-            $moodleSendGradesAnsw= (sendOAuthBodyPOST($method, $endpoint, $oauth_consumer_key, $oauth_consumer_secret, $content_type, $postBody));
-		
-	}
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+## ##send grades to moodle by 
+
+if ($update && $_SESSION["moodleData"]) {
+    $d["moodleGrades"]["session"]=$_SESSION;
+    $d["scorePercentDecimal"]=round($d["scorePercent"]/100,2) ;	
+    require_once($_SERVER['DOCUMENT_ROOT'] ."/_LTI1.3_TP/config.php");
+    $d["moodleGrades"]["gradesData"] = array(
+        'timestamp' => DateTime::createFromFormat('U.u', microtime(true))->format('Y-m-d\TH:i:s.uP'),
+        'userId' => $_SESSION["muser_id"], // ID dell'utente nel sistema Moodle
+        'scoreGiven' => $d["scorePercent"], // Voto dato all'utente
+        'scoreMaximum' => 100, // Voto massimo possibile
+        'activityProgress' => 'Completed', // Stato dell'attività
+        'gradingProgress' => 'FullyGraded', // Stato della valutazione
+    );
+    $d["moodleGrades"]["sendGrades"] = getTokenSendGradesToMoodle( $d["moodleGrades"]["gradesData"], $_SESSION);
+    $d["stepFinal"]["grade2moodle"]=$d["moodleGrades"]["sendGrades"]["message"];
+    unset( $d["moodleGrades"]["gradesData"]);
+}
+
+
     $d["avatarsIds"]=array_unique($d["avatarsIds"]);
 	unset ($d["q"]);
 	return $d;
@@ -823,7 +794,7 @@ function finalCalc2NoCustomOTTAVI($idMatch, $update=false){ //, $playerSex="m"
 			);
             if ($d["stepFinal"]["avatar_id"]!=1000) $d["avatarsIds"][]=$d["stepFinal"]["avatar_id"];
 
-
+            
  
  
 	$d["update"]=$update;

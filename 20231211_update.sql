@@ -1,0 +1,4 @@
+ALTER TABLE `games_steps` CHANGE `imgAlt_1` `altImg_1` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `games_steps` CHANGE `imgAlt_2` `altImg_2` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `games_steps` CHANGE `imgAlt_3` `altImg_3` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `games_steps` CHANGE `imgAlt_4` `altImg_4` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

@@ -27,10 +27,19 @@ while (	$d=sql_fetch_assoc($q)) {
 		$O.="".$d["title"]."</a><br />";
 		 $O.="</strong>";
 		$O.="<div class=\"boxb\">";
-			$O.="Key: ".$d["family"]."";
+			$O.="ID: ".$d["family"]."";
 		$O.="</div>";
+		$O.="<div class=\"boxb\">";
+			$O.="Moodle ISS: ";
+            if ($d["iss"]) $O.='<a target="_BLANK" href="'.$d["iss"].'">'.$d["iss"].'</a>';
+		$O.="</div>";
+        
 		$O.="<div class=\"boxb\">";		
-			$O.="Secret: ".$d["secret"]."";
+			//$O.="public key: ".$d["public"]."";
+            $O.="Moodle LTI 1.3 public key:<br />";
+            $O.='<textarea disabled="disabled" style="padding:10px; font-size:12px" name="public" rows="8" cols="80">';
+            $O.=$d["public"];
+            $O.='</textarea>';
 		$O.="</div>";
 	//$O.=print_r($d, true);	
 	$O.="</div>";

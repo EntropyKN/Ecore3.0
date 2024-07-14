@@ -54,10 +54,9 @@ switch ($G["cmd"]) :
 		$G["f"]= finalCalc2($G["idm"],true); //true
 		
 		echo "true";
+		echo "|-|";echo 		json_encode( $G["f"]["stepFinal"]);
 		echo "|-|";
-		echo 		json_encode( $G["f"]["stepFinal"]);
-		echo "|-|";
-		print_r($G);
+		print_r($G["f"]);
 		die();exit();	
 	
 	break;

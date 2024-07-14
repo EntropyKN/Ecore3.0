@@ -326,7 +326,7 @@ $(function() {
 		if (!isFinal) {
 			$("#playerConsoleCont").attr("data-answern",S[s]["answerN"])
 			$(".choiceOpt").hide()
-            console.log (S[s]["answersType"])
+            //console.log (S[s]["answersType"])
             var i
 			for (i = 1; i <= S[s]["answerN"]; i++) {
 	
@@ -403,8 +403,8 @@ $(function() {
 			,cache: false,dataType: 'html',
 			success: function(php_answer){
 				var R=php_answer.split("|-|")
-				console.log ("TRANS:"+ php_answer)
-                //if (data["cmd"]=="finalCalc") alert(php_answer)
+
+                //console.log ("TRANS:", php_answer)
 				$("#debug").html(php_answer)
 				$("#saving").hide()
 					
@@ -449,7 +449,8 @@ $(function() {
 				/////////////////////////////////////////////////////////
 				if (data["cmd"]=="finalCalc") {
 					var FINALSTEPDATA=$.parseJSON(R[1])
-					
+					console.log ("moodleSendGrades:", FINALSTEPDATA["grade2moodle"])
+                   // console.log ("***FINALCALC***", php_answer)
 					loadStep((FINALSTEPDATA["step"]-1),"A",true)
 				}
 				//////////////////////////////////////////////////////////
